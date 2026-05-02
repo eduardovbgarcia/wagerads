@@ -1,5 +1,5 @@
 /* WagerAds — minimal offline-first service worker */
-const VERSION = 'wagerads-v2';
+const VERSION = 'wagerads-v3';
 const CORE = [
   './',
   './index.html',
@@ -32,6 +32,11 @@ self.addEventListener('fetch', (event) => {
   const req = event.request;
   if (req.method !== 'GET') return;
   const url = new URL(req.url);
+
+  // Backoffice and API are never cached — they need fresh data and auth.
+  if (url.pathname.startsWith('/admin') || url.pathname.startsWith('/api/')) {
+    return;
+  }
 
   // HTML — network first, fall back to cache
   if (req.mode === 'navigate' || (req.headers.get('accept') || '').includes('text/html')) {
