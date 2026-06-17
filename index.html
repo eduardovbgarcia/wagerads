@@ -5,12 +5,12 @@
 <title>WagerAds — Performance media for iGaming operators.</title>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <!-- Favicons -->
-<link rel="icon" type="image/svg+xml" href="icons/favicon.svg" />
+<link rel="icon" type="image/svg+xml" href="icons/icone-laranja-wagerads.svg" />
 <link rel="icon" type="image/png" sizes="64x64" href="icons/favicon-64.png" />
 <link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png" />
 <link rel="icon" type="image/png" sizes="512x512" href="icons/icon-512.png" />
 <link rel="apple-touch-icon" sizes="180x180" href="icons/apple-touch-icon.png" />
-<link rel="mask-icon" href="icons/favicon.svg" color="#0A0E1A" />
+<link rel="mask-icon" href="icons/icone-laranja-wagerads.svg" color="#FF7A2F" />
 <!-- PWA -->
 <link rel="manifest" href="manifest.webmanifest" />
 <meta name="theme-color" content="#0A0E1A" />
@@ -38,219 +38,264 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Inter+Tight:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
 <style>
-  :root{--ink:#0B0B0C;--ink-soft:#1A1A1D;--graphite:#2A2D33;--paper:#F4F1EA;--paper-warm:#E8DFCF;--stone:#9C9A93;--slate:#5C5A55;--line:rgba(11,11,12,0.10);--line-dark:rgba(244,241,234,0.15)}
+  :root{
+    --ink:#08080A;--ink-soft:#110D07;--graphite:#1E1208;
+    --paper:#EDEBE6;--paper-warm:#1C1007;
+    --stone:#6B4A2A;--slate:rgba(237,235,230,0.5);
+    --line:rgba(232,92,13,0.15);--line-dark:rgba(232,92,13,0.12);
+    --fire:#E85C0D;--fire-bright:#FF7A2F;--fire-dim:#7A2E00;--lava:#FF4500;
+    --section-a:#0A0704;--section-b:#0D0A06;--section-c:#080604;
+  }
   *,*::before,*::after{box-sizing:border-box}
-  html,body{margin:0;padding:0;background:var(--paper);color:var(--ink);font-family:'Inter Tight',system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+  html,body{margin:0;padding:0;background:var(--section-a);color:var(--paper);font-family:'Inter Tight',system-ui,sans-serif;-webkit-font-smoothing:antialiased}
   a{color:inherit;text-decoration:none}
   button{font-family:inherit;cursor:pointer;border:none;background:none}
   input,textarea,select{font-family:inherit}
   .display{font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;letter-spacing:-0.05em;line-height:0.95}
   .headline{font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;letter-spacing:-0.035em;line-height:1.05}
   .mono{font-family:'JetBrains Mono',monospace;letter-spacing:0.06em}
-  .eyebrow{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.22em;text-transform:uppercase;color:var(--slate)}
+  .eyebrow{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.22em;text-transform:uppercase;color:var(--fire-bright)}
   .container{max-width:1280px;margin:0 auto;padding:0 40px}
   @media (max-width:720px){.container{padding:0 24px}}
 
   /* NAV */
-  .nav{position:sticky;top:0;z-index:50;background:rgba(244,241,234,0.85);backdrop-filter:saturate(140%) blur(10px);-webkit-backdrop-filter:saturate(140%) blur(10px);border-bottom:1px solid var(--line)}
+  .nav{position:fixed;top:0;left:0;right:0;z-index:50;background:transparent;transition:background .3s,border-color .3s;border-bottom:1px solid transparent}
+  .nav.scrolled{background:rgba(8,8,10,0.88);backdrop-filter:saturate(140%) blur(12px);-webkit-backdrop-filter:saturate(140%) blur(12px);border-bottom:1px solid rgba(244,241,234,0.08)}
   .nav-inner{display:flex;align-items:center;justify-content:space-between;height:72px;gap:24px}
-  .nav-links{display:flex;gap:28px;font-size:14px;font-weight:500;color:var(--ink)}
-  .nav-links a{position:relative;padding:6px 0}
-  .nav-links a:hover{color:var(--graphite)}
+  .nav-links{display:flex;gap:28px;font-size:14px;font-weight:500;color:rgba(244,241,234,0.85)}
+  .nav-links a{position:relative;padding:6px 0;transition:color .15s}
+  .nav-links a:hover{color:var(--paper)}
   .nav-right{display:flex;align-items:center;gap:16px}
-  .lang-switch{display:inline-flex;border:1px solid var(--line);font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;overflow:hidden}
-  .lang-btn{padding:8px 12px;color:var(--slate);transition:background .15s,color .15s;border:none;background:transparent}
-  .lang-btn+.lang-btn{border-left:1px solid var(--line)}
-  .lang-btn[aria-pressed="true"]{background:var(--ink);color:var(--paper)}
-  .lang-btn:hover:not([aria-pressed="true"]){color:var(--ink)}
-  .nav-cta{background:var(--ink);color:var(--paper);padding:11px 18px;font-size:13px;font-weight:600;display:inline-flex;align-items:center;gap:8px;transition:background .15s;white-space:nowrap;flex-shrink:0}
+  .lang-switch{display:inline-flex;border:1px solid rgba(244,241,234,0.2);font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;overflow:hidden}
+  .lang-btn{padding:8px 12px;color:rgba(244,241,234,0.55);transition:background .15s,color .15s;border:none;background:transparent}
+  .lang-btn+.lang-btn{border-left:1px solid rgba(244,241,234,0.2)}
+  .lang-btn[aria-pressed="true"]{background:var(--fire);color:var(--paper)}
+  .lang-btn:hover:not([aria-pressed="true"]){color:var(--paper)}
+  .nav-cta{background:linear-gradient(135deg,#FF7A2F 0%,#C44A00 100%);color:var(--paper);padding:11px 22px;font-size:13px;font-weight:600;display:inline-flex;align-items:center;gap:8px;border-radius:100px;transition:opacity .15s;white-space:nowrap;flex-shrink:0}
   .nav-cta span:first-child{white-space:nowrap}
-  .nav-cta:hover{background:var(--graphite)}
+  .nav-cta:hover{opacity:0.88}
   @media (max-width:980px){.nav-links{display:none}}
   @media (max-width:560px){.nav-cta{display:none}}
   .brand{display:flex;align-items:center;gap:12px}
-  .brand-text{font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;font-size:20px;letter-spacing:-0.04em}
+  .brand-text{font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;font-size:20px;letter-spacing:-0.04em;color:var(--paper)}
 
-  /* HERO */
-  .hero{padding:96px 0 64px;position:relative;overflow:hidden}
-  .hero-grid{display:grid;grid-template-columns:1.6fr 1fr;gap:64px;align-items:end}
-  .hero h1{margin:0;font-size:clamp(72px,12vw,160px);line-height:0.95}
-  .hero h1 .punct{color:var(--stone)}
-  .hero h1 .hero-title-text{white-space:nowrap}
-  /* Hero stats moved to a horizontal band below */
-  .hero-stats-band{border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:var(--paper-warm)}
+  /* HERO — dark immersive */
+  .hero{position:relative;min-height:100vh;background:#08080A url('imgs/hero-wagerads.webp') center top / cover no-repeat;color:var(--paper);overflow:hidden;display:flex;flex-direction:column}
+  .hero-illustration{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;pointer-events:none;user-select:none}
+  .hero-overlay{position:absolute;inset:0;background:linear-gradient(to bottom,rgba(8,8,10,0.15) 0%,rgba(8,8,10,0.05) 40%,rgba(8,8,10,0.55) 75%,rgba(8,8,10,0.92) 100%);pointer-events:none}
+  .hero-pillars-fade{position:absolute;bottom:0;left:0;right:0;height:340px;background:linear-gradient(to bottom,transparent 0%,#08080A 100%);pointer-events:none;z-index:1}
+  .hero-content{position:relative;z-index:2;flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:140px 24px 60px}
+  .hero-badge{display:inline-flex;align-items:center;gap:8px;border-radius:100px;padding:8px 18px;border:1px solid transparent;background:transparent padding-box,linear-gradient(135deg,#FF7A2F,#C44A00) border-box;margin-bottom:32px;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.18em;text-transform:uppercase;color:var(--fire-bright)}
+  .hero-badge svg{width:12px;height:12px;fill:var(--fire-bright);flex-shrink:0}
+  .hero h1{margin:0;font-size:clamp(64px,10vw,136px);line-height:0.93;letter-spacing:-0.04em;font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;color:var(--paper);max-width:900px}
+  .hero h1 .accent{color:var(--fire)}
+  .hero-lead{font-size:18px;line-height:1.6;color:rgba(244,241,234,0.72);max-width:520px;margin:24px auto 0}
+  .hero-actions{display:flex;gap:14px;flex-wrap:wrap;margin-top:36px;justify-content:center}
+  .btn-primary{background:linear-gradient(135deg,#FF7A2F 0%,#C44A00 100%);color:var(--paper);padding:17px 30px;font-size:15px;font-weight:700;display:inline-flex;align-items:center;gap:10px;border-radius:100px;transition:opacity .15s,transform .15s;border:none;cursor:pointer;white-space:nowrap}
+  .btn-primary:hover{opacity:0.88;transform:translateY(-1px)}
+  .btn-secondary{background:transparent;color:rgba(244,241,234,0.85);padding:17px 30px;font-size:15px;font-weight:500;border:1px solid rgba(244,241,234,0.25);border-radius:100px;display:inline-flex;align-items:center;gap:10px;transition:border-color .15s,color .15s;cursor:pointer;white-space:nowrap}
+  .btn-secondary:hover{border-color:rgba(244,241,234,0.6);color:var(--paper)}
+  /* feature pillars strip at bottom of hero */
+  .hero-pillars{position:relative;z-index:2;display:grid;grid-template-columns:repeat(3,1fr);gap:0;border-top:1px solid rgba(244,241,234,0.1);max-width:900px;margin:0 auto;width:100%}
+  .hero-pillar{padding:28px 32px;display:flex;align-items:center;gap:20px;border-right:1px solid rgba(244,241,234,0.1)}
+  .hero-pillar:last-child{border-right:none}
+  .hero-pillar-hex{width:44px;height:44px;flex-shrink:0;display:flex;align-items:center;justify-content:center;position:relative}
+  .hero-pillar-hex svg.hex-bg{position:absolute;inset:0;width:44px;height:44px}
+  .hero-pillar-hex svg.hex-icon{position:relative;z-index:1;width:18px;height:18px;stroke:var(--fire-bright);fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+  .hero-pillar-text strong{display:block;font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;font-size:15px;letter-spacing:-0.01em;color:var(--paper)}
+  .hero-pillar-text span{font-size:12px;color:rgba(244,241,234,0.55);line-height:1.4;display:block;margin-top:3px}
+  @media (max-width:720px){.hero-pillars{grid-template-columns:1fr}.hero-pillar{border-right:none;border-bottom:1px solid rgba(244,241,234,0.1)}.hero-pillar:last-child{border-bottom:none}}
+  @media (max-width:560px){.hero h1{font-size:clamp(48px,14vw,72px)}.hero-lead{font-size:16px}.hero-content{padding:120px 20px 40px}}
+  /* Stats band — dark version */
+  .hero-stats-band{background:#0D0D10;border-bottom:1px solid rgba(244,241,234,0.08)}
   .hero-stats-band-inner{display:grid;grid-template-columns:repeat(4,1fr);gap:0}
-  .hero-stats-band .hero-stat{flex-direction:column;align-items:flex-start;justify-content:flex-start;padding:32px 28px;border-bottom:none;border-right:1px solid var(--line);min-height:140px;gap:14px}
+  .hero-stats-band .hero-stat{flex-direction:column;align-items:flex-start;justify-content:flex-start;padding:32px 28px;border-bottom:none;border-right:1px solid rgba(244,241,234,0.08);min-height:140px;gap:14px;display:flex}
   .hero-stats-band .hero-stat:last-child{border-right:none}
-  .hero-stats-band .hero-stat .num{font-size:48px}
-  .hero-stats-band .hero-stat .lbl{text-align:left;max-width:none}
-  @media (max-width:920px){.hero-stats-band-inner{grid-template-columns:repeat(2,1fr)}.hero-stats-band .hero-stat:nth-child(2){border-right:none}.hero-stats-band .hero-stat:nth-child(1),.hero-stats-band .hero-stat:nth-child(2){border-bottom:1px solid var(--line)}}
-  @media (max-width:560px){.hero-stats-band-inner{grid-template-columns:1fr}.hero-stats-band .hero-stat{border-right:none!important;border-bottom:1px solid var(--line)!important}}
-  .hero-sub{font-family:'Plus Jakarta Sans',sans-serif;font-weight:600;font-size:24px;letter-spacing:-0.025em;line-height:1.2;color:var(--ink);margin:24px 0 0;max-width:560px}
-  .hero-lead{font-size:17px;line-height:1.55;color:var(--slate);max-width:520px;margin:24px 0 0}
-  .hero-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:32px}
-  .btn-primary{background:var(--ink);color:var(--paper);padding:16px 22px;font-size:14px;font-weight:600;display:inline-flex;align-items:center;gap:8px;transition:background .15s;border:none;cursor:pointer;white-space:nowrap}
-  .btn-primary:hover{background:var(--graphite)}
-  .btn-secondary{background:transparent;color:var(--ink);padding:16px 22px;font-size:14px;font-weight:500;border:1px solid var(--ink);display:inline-flex;align-items:center;gap:8px;transition:background .15s,color .15s;cursor:pointer;white-space:nowrap}
-  .btn-secondary:hover{background:var(--ink);color:var(--paper)}
-  .hero-side{display:flex;flex-direction:column;gap:32px;padding-bottom:8px}
-  .hero-side-top{display:flex;flex-direction:column;gap:18px}
-  .hero-stats{display:grid;grid-template-columns:1fr;gap:0;border-top:1px solid var(--line)}
-  .hero-stat{padding:24px 0;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:baseline;gap:16px}
-  .hero-stat .num{font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;font-size:44px;letter-spacing:-0.035em;line-height:1}
-  .hero-stat .lbl{font-size:11px;font-family:'JetBrains Mono',monospace;letter-spacing:0.14em;text-transform:uppercase;color:var(--slate);text-align:right;max-width:160px;line-height:1.4}
-  @media (max-width:920px){.hero h1{font-size:80px}.hero-grid{grid-template-columns:1fr;gap:40px;align-items:start}}
-  @media (max-width:560px){.hero h1{font-size:60px}.hero-sub{font-size:20px}}
+  .hero-stats-band .hero-stat .num{font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:48px;letter-spacing:-0.04em;line-height:1;color:var(--paper)}
+  .hero-stats-band .hero-stat .lbl{font-size:11px;font-family:'JetBrains Mono',monospace;letter-spacing:0.14em;text-transform:uppercase;color:rgba(244,241,234,0.45);text-align:left;max-width:none;line-height:1.4}
+  @media (max-width:920px){.hero-stats-band-inner{grid-template-columns:repeat(2,1fr)}.hero-stats-band .hero-stat:nth-child(2){border-right:none}.hero-stats-band .hero-stat:nth-child(1),.hero-stats-band .hero-stat:nth-child(2){border-bottom:1px solid rgba(244,241,234,0.08)}}
+  @media (max-width:560px){.hero-stats-band-inner{grid-template-columns:1fr}.hero-stats-band .hero-stat{border-right:none!important;border-bottom:1px solid rgba(244,241,234,0.08)!important}}
 
   /* TICKER */
-  .ticker{border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:28px 0;background:var(--paper-warm)}
+  .ticker{border-top:1px solid rgba(244,241,234,0.08);border-bottom:1px solid rgba(244,241,234,0.08);padding:28px 0;background:#0D0D10;color:var(--paper)}
   .ticker-inner{display:flex;align-items:center;gap:32px;justify-content:space-between;flex-wrap:wrap}
-  .ticker-label{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.22em;text-transform:uppercase;color:var(--slate);white-space:nowrap}
-  .ticker-marks{display:flex;gap:32px;align-items:center;font-family:'Plus Jakarta Sans',sans-serif;font-weight:600;font-size:14px;letter-spacing:0.04em;color:var(--ink);flex-wrap:wrap;text-transform:uppercase}
-  .ticker-marks span{opacity:0.55}
+  .ticker-label{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.22em;text-transform:uppercase;color:rgba(244,241,234,0.4);white-space:nowrap}
+  .ticker-marks{display:flex;gap:32px;align-items:center;font-family:'Plus Jakarta Sans',sans-serif;font-weight:600;font-size:14px;letter-spacing:0.04em;color:rgba(244,241,234,0.75);flex-wrap:wrap;text-transform:uppercase}
+  .ticker-marks span{opacity:0.5}
 
   /* SECTIONS */
-  .section{padding:120px 0}
-  .section--dark{background:var(--ink);color:var(--paper)}
+  .section{padding:120px 0;background:var(--section-a);color:var(--paper)}
+  .section--dark{background:var(--section-b);color:var(--paper)}
   .section--dark .section-head h2{color:var(--paper)}
-  .section--dark .section-head p{color:rgba(244,241,234,0.65)}
-  .section--dark .eyebrow{color:rgba(244,241,234,0.55)}
+  .section--dark .section-head p{color:rgba(237,235,230,0.6)}
+  .section--dark .eyebrow{color:var(--fire-bright)}
   .section-head{display:grid;grid-template-columns:1.4fr 1.6fr;gap:64px;margin-bottom:64px;align-items:end}
-  .section-head h2{margin:0;font-size:64px;text-wrap:balance}
-  .section-head p{margin:0;font-size:17px;line-height:1.55;color:var(--slate);max-width:520px}
+  .section-head h2{margin:0;font-size:64px;text-wrap:balance;color:var(--paper)}
+  .section-head p{margin:0;font-size:17px;line-height:1.55;color:rgba(237,235,230,0.6);max-width:520px}
   @media (max-width:840px){.section{padding:80px 0}.section-head{grid-template-columns:1fr;gap:24px;margin-bottom:40px}.section-head h2{font-size:44px}}
 
+  /* PROBLEM STATEMENT */
+  .problem{background:#08080A;padding:80px 0;border-bottom:1px solid rgba(232,92,13,0.12)}
+  .problem-lead{font-family:'Plus Jakarta Sans',sans-serif;font-weight:300;font-size:clamp(20px,3vw,28px);letter-spacing:-0.02em;line-height:1.3;color:rgba(237,235,230,0.6);margin:0 0 48px;max-width:680px}
+  .problem-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:48px}
+  .problem-card{background:#111114;border:1px solid rgba(255,255,255,0.07);border-radius:12px;padding:24px 20px;display:flex;gap:14px;align-items:flex-start;transition:border-color .2s}
+  .problem-card:hover{border-color:rgba(232,92,13,0.3)}
+  .problem-card-icon{font-size:14px;color:var(--fire);font-weight:700;flex-shrink:0;margin-top:2px;font-family:'JetBrains Mono',monospace}
+  .problem-card-text{font-size:15px;line-height:1.55;color:rgba(237,235,230,0.75);font-weight:500}
+  .problem-cta{font-family:'Plus Jakarta Sans',sans-serif;font-weight:400;font-size:clamp(18px,2.5vw,24px);letter-spacing:-0.02em;line-height:1.4;color:rgba(237,235,230,0.85);margin:0;max-width:740px}
+  .problem-cta em{font-style:normal;color:var(--fire-bright)}
+  @media (max-width:720px){.problem-cards{grid-template-columns:1fr}}
+
+  .stack-sub{font-size:17px;line-height:1.6;color:rgba(237,235,230,0.55);margin:22px 0 0 !important;max-width:680px}
+
   /* STACK (4 pillars) */
-  .stack{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border-top:1px solid var(--line)}
-  .pillar{padding:36px 28px 36px 0;border-bottom:1px solid var(--line);display:flex;flex-direction:column;gap:16px;position:relative}
-  .pillar:not(:last-child){border-right:1px solid var(--line);padding-right:28px}
-  .pillar:not(:first-child){padding-left:28px}
-  .pillar-icon{width:40px;height:40px;display:flex;align-items:center;justify-content:center;background:var(--ink);color:var(--paper);font-family:'JetBrains Mono',monospace;font-size:14px;font-weight:600}
-  .pillar-num{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.16em;color:var(--slate);text-transform:uppercase}
-  .pillar-title{font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;font-size:22px;letter-spacing:-0.025em;line-height:1.15}
-  .pillar-body{font-size:13px;line-height:1.6;color:var(--slate)}
-  @media (max-width:920px){.stack{grid-template-columns:repeat(2,1fr)}.pillar:nth-child(1),.pillar:nth-child(2){border-right:1px solid var(--line)}.pillar:nth-child(3){padding-left:0;border-right:1px solid var(--line)}.pillar:nth-child(4){padding-left:28px}}
-  @media (max-width:560px){.stack{grid-template-columns:1fr}.pillar{border-right:none!important;padding-right:0!important;padding-left:0!important}}
+  .stack{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+  .pillar{background:#111114;border:1px solid rgba(255,255,255,0.07);border-radius:16px;padding:28px 24px;display:flex;flex-direction:column;gap:20px;transition:border-color .2s;position:relative;overflow:hidden}
+  .pillar::before{content:'';position:absolute;inset:0;background:url('imgs/light-lava-cards.png') right center / cover no-repeat;opacity:0.9;border-radius:16px;z-index:0}
+  .pillar>*{position:relative;z-index:1}
+  .pillar:hover{border-color:rgba(232,92,13,0.35)}
+  .pillar-icon{width:48px;height:48px;display:flex;align-items:center;justify-content:center;background:rgba(232,92,13,0.15);border-radius:10px;flex-shrink:0}
+  .pillar-icon svg{width:22px;height:22px;stroke:var(--fire-bright);fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+  .pillar-num{display:none}
+  .pillar-title{font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;font-size:18px;letter-spacing:-0.02em;line-height:1.2;color:var(--paper)}
+  .pillar-body{font-size:14px;line-height:1.6;color:rgba(237,235,230,0.55)}
+  @media (max-width:920px){.stack{grid-template-columns:repeat(2,1fr)}}
+  @media (max-width:560px){.stack{grid-template-columns:1fr}}
 
   /* QUOTE band */
-  .quote{background:var(--ink);color:var(--paper);padding:120px 0;position:relative;overflow:hidden}
-  .quote-text{font-family:'Plus Jakarta Sans',sans-serif;font-weight:300;font-size:64px;letter-spacing:-0.035em;line-height:1.1;max-width:1100px}
-  .quote-text em{font-style:normal;color:var(--paper-warm)}
-  .quote-attr{margin-top:48px;display:flex;align-items:center;gap:16px;font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:0.14em;text-transform:uppercase;color:rgba(244,241,234,0.55)}
-  .quote-attr-line{width:48px;height:1px;background:rgba(244,241,234,0.4)}
+  .quote{background:var(--section-c);color:var(--paper);padding:120px 0;position:relative;overflow:hidden}
+  .quote-text{font-family:'Plus Jakarta Sans',sans-serif;font-weight:300;font-size:64px;letter-spacing:-0.035em;line-height:1.1;max-width:1100px;position:relative;z-index:1}
+  .quote-text em{font-style:normal;color:var(--fire-bright)}
+  .quote-attr{margin-top:48px;display:flex;align-items:center;gap:16px;font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:0.14em;text-transform:uppercase;color:rgba(237,235,230,0.4);position:relative;z-index:1}
+  .quote-attr-line{width:48px;height:1px;background:rgba(232,92,13,0.35)}
+  .quote-bg-cols{position:absolute;right:0;bottom:0;opacity:0.04;pointer-events:none;user-select:none}
   @media (max-width:840px){.quote{padding:80px 0}.quote-text{font-size:36px}}
 
+  .quote-bg::after{content:'';position:absolute;inset:0;background:linear-gradient(to bottom,#080604 0%,transparent 30%,transparent 70%,#080604 100%),linear-gradient(to right,#080604 0%,#080604 15%,transparent 55%),rgba(8,6,4,0.35);pointer-events:none;z-index:0}
+  .quote-bg .container{position:relative;z-index:1}
+
   /* AGENTS SECTION (dark) */
-  .agents{background:var(--ink);color:var(--paper);padding:120px 0;border-top:1px solid var(--line-dark);position:relative;overflow:hidden}
+  .agents{background:#0E0E11;color:var(--paper);padding:120px 0;border-top:1px solid var(--line-dark);position:relative;overflow:hidden}
   .agents .section-head h2{color:var(--paper)}
-  .agents .section-head p{color:rgba(244,241,234,0.65)}
-  .agents .eyebrow{color:rgba(244,241,234,0.55)}
-  .agents-status{display:inline-flex;align-items:center;gap:10px;padding:8px 14px;border:1px solid rgba(244,241,234,0.2);font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:rgba(244,241,234,0.75);margin-bottom:32px}
-  .agents-status .pulse{width:8px;height:8px;background:#52C53F;border-radius:50%;position:relative;flex-shrink:0}
-  .agents-status .pulse::after{content:"";position:absolute;inset:-4px;border-radius:50%;background:#52C53F;opacity:0.4;animation:agentpulse 2s ease-in-out infinite}
+  .agents .section-head p{color:rgba(237,235,230,0.6)}
+  .agents .eyebrow{color:var(--fire-bright)}
+  .agents-status{display:inline-flex;align-items:center;gap:10px;padding:8px 14px;border:1px solid rgba(232,92,13,0.3);font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:rgba(237,235,230,0.75);margin-bottom:32px}
+  .agents-status .pulse{width:8px;height:8px;background:#4ADE80;border-radius:50%;position:relative;flex-shrink:0}
+  .agents-status .pulse::after{content:"";position:absolute;inset:-4px;border-radius:50%;background:#4ADE80;opacity:0.4;animation:agentpulse 2s ease-in-out infinite}
   @keyframes agentpulse{0%,100%{transform:scale(1);opacity:0.4}50%{transform:scale(1.6);opacity:0}}
   .agents-frame{display:grid;grid-template-columns:1.1fr 1fr;gap:64px;margin-top:24px;align-items:start}
   .agents-pitch{display:flex;flex-direction:column;gap:24px}
   .agents-pitch-lead{font-family:'Plus Jakarta Sans',sans-serif;font-weight:300;font-size:34px;letter-spacing:-0.025em;line-height:1.2;color:var(--paper)}
-  .agents-pitch-lead em{font-style:normal;color:var(--paper-warm);font-weight:500}
-  .agents-pitch-body{font-size:15px;line-height:1.65;color:rgba(244,241,234,0.7);max-width:520px}
-  .agents-meta{display:grid;grid-template-columns:repeat(2,auto);gap:8px 32px;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.06em;color:rgba(244,241,234,0.6);margin-top:8px}
-  .agents-meta .k{color:rgba(244,241,234,0.45);text-transform:uppercase;letter-spacing:0.16em}
-  .agents-list{border-top:1px solid rgba(244,241,234,0.15)}
-  .agents-list-item{display:grid;grid-template-columns:auto 1fr auto;gap:20px;padding:22px 0;border-bottom:1px solid rgba(244,241,234,0.15);align-items:center;transition:background .2s}
-  .agents-list-item:hover{background:rgba(244,241,234,0.02)}
-  .agents-list-num{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.14em;color:rgba(244,241,234,0.4);min-width:32px}
+  .agents-pitch-lead em{font-style:normal;color:var(--fire-bright);font-weight:500}
+  .agents-pitch-body{font-size:15px;line-height:1.65;color:rgba(237,235,230,0.6);max-width:520px}
+  .agents-meta{display:grid;grid-template-columns:repeat(2,auto);gap:8px 32px;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.06em;color:rgba(237,235,230,0.55);margin-top:8px}
+  .agents-meta .k{color:rgba(232,92,13,0.6);text-transform:uppercase;letter-spacing:0.16em}
+  .agents-list{border-top:1px solid var(--line-dark)}
+  .agents-list-item{display:grid;grid-template-columns:auto 1fr auto;gap:20px;padding:22px 0;border-bottom:1px solid var(--line-dark);align-items:center;transition:background .2s}
+  .agents-list-item:hover{background:rgba(232,92,13,0.04)}
+  .agents-list-num{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.14em;color:rgba(232,92,13,0.4);min-width:32px}
   .agents-list-name{font-family:'Plus Jakarta Sans',sans-serif;font-weight:600;font-size:18px;letter-spacing:-0.015em;color:var(--paper)}
-  .agents-list-meta{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:rgba(244,241,234,0.5);text-align:right}
+  .agents-list-meta{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:rgba(237,235,230,0.4);text-align:right}
   @media (max-width:840px){.agents{padding:80px 0}.agents-frame{grid-template-columns:1fr;gap:48px}.agents-pitch-lead{font-size:26px}.agents-list-item{grid-template-columns:auto 1fr;gap:14px}.agents-list-meta{grid-column:1/-1;text-align:left;padding-left:48px}}
 
-  /* TRACKING DIAGRAM (light) */
-  .tracking{background:var(--paper-warm);color:var(--ink);padding:120px 0;border-top:1px solid var(--line)}
-  .diagram{border:1px solid var(--line);background:var(--paper);padding:48px 32px;display:grid;grid-template-columns:repeat(5,1fr);gap:24px;align-items:start;position:relative}
-  .diagram-col.is-core{position:relative}
-  .diagram-col.is-core::before{content:"CORE";position:absolute;top:-32px;left:0;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.18em;color:#0a7a3f;font-weight:600}
-  .diagram-col.is-core .diagram-pill.accent{box-shadow:0 0 0 1px var(--ink),0 0 0 4px rgba(15,15,16,0.08)}
+  /* TRACKING DIAGRAM */
+  .tracking{background:var(--section-a);color:var(--paper);padding:120px 0;border-top:1px solid var(--line)}
+  .diagram{background:#0E0E11;border:1px solid transparent;border-radius:16px;padding:48px 32px;display:grid;grid-template-columns:repeat(5,1fr);gap:24px;align-items:start;position:relative}
+  .diagram::before{content:'';position:absolute;inset:0;border-radius:16px;padding:1px;background:linear-gradient(135deg,rgba(255,122,47,0.55) 0%,rgba(196,74,0,0.1) 35%,rgba(255,255,255,0.04) 60%,rgba(255,122,47,0.35) 100%);-webkit-mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);-webkit-mask-composite:destination-out;mask-composite:exclude;pointer-events:none}
+  .diagram-col.is-core::before{content:"";display:none}
+  .diagram-col.is-core .diagram-pill.accent{box-shadow:0 0 0 1px var(--fire),0 0 12px rgba(232,92,13,0.25)}
   .diagram-col{display:flex;flex-direction:column;gap:14px;position:relative;z-index:1}
-  .diagram-col-label{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.18em;text-transform:uppercase;color:var(--slate);padding-bottom:14px;border-bottom:1px dashed var(--line)}
-  .diagram-pill{background:var(--paper);border:1px solid var(--line);padding:12px 14px;font-size:12px;font-family:'JetBrains Mono',monospace;letter-spacing:0.04em;color:var(--ink);transition:background .15s,border-color .15s}
-  .diagram-pill:hover{background:var(--paper-warm);border-color:var(--graphite)}
-  .diagram-pill.accent{background:var(--ink);color:var(--paper);border-color:var(--ink);font-weight:600}
-  .diagram-arrow{position:absolute;top:50%;right:-20px;width:16px;height:1px;background:var(--graphite);opacity:0.3}
+  .diagram-col-label{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.18em;text-transform:uppercase;color:var(--fire-bright);padding-bottom:14px;border-bottom:1px dashed rgba(255,122,47,0.2)}
+  .diagram-pill{background:rgba(237,235,230,0.04);border:1px solid var(--line);padding:12px 14px;font-size:12px;font-family:'JetBrains Mono',monospace;letter-spacing:0.04em;color:rgba(237,235,230,0.75);transition:background .15s,border-color .15s}
+  .diagram-pill:hover{background:rgba(232,92,13,0.08);border-color:rgba(232,92,13,0.35)}
+  .diagram-pill.accent{background:var(--fire);color:var(--paper);border-color:var(--fire);font-weight:600}
+  .diagram-arrow{position:absolute;top:50%;right:-20px;width:16px;height:1px;background:var(--fire);opacity:0.3}
   @media (max-width:920px){.diagram{grid-template-columns:1fr;gap:32px}.diagram-arrow{display:none}}
 
-  /* REACH / MAP — single-column layout */
+  /* REACH / MAP */
   .reach{display:grid;grid-template-columns:1fr;gap:48px}
-  .reach-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
-  .reach-stat{padding:28px 24px;display:flex;flex-direction:column;gap:6px;border-right:1px solid var(--line)}
+  .reach-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border-top:1px solid var(--line-dark);border-bottom:1px solid var(--line-dark)}
+  .reach-stat{padding:28px 24px;display:flex;flex-direction:column;gap:6px;border-right:1px solid var(--line-dark)}
   .reach-stat:last-child{border-right:none}
-  .reach-stat .num{font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:48px;letter-spacing:-0.04em;line-height:1}
-  .reach-stat .lbl{font-size:11px;font-family:'JetBrains Mono',monospace;letter-spacing:0.14em;text-transform:uppercase;color:var(--slate)}
+  .reach-stat .num{font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:48px;letter-spacing:-0.04em;line-height:1;color:var(--fire-bright)}
+  .reach-stat .lbl{font-size:11px;font-family:'JetBrains Mono',monospace;letter-spacing:0.14em;text-transform:uppercase;color:rgba(237,235,230,0.45)}
   .markets-grid{display:grid;grid-template-columns:1fr 1fr;gap:0 48px}
-  .markets-list{display:flex;flex-direction:column;gap:0;border-top:1px solid var(--line)}
-  .markets-summary{display:flex;gap:16px;flex-wrap:wrap;padding:0 0 24px;margin-bottom:0;border-bottom:1px solid var(--line);grid-column:1/-1}
-  .markets-summary-pill{display:inline-flex;align-items:center;gap:10px;padding:10px 16px;background:var(--paper-warm);border:1px solid var(--line);font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink)}
-  .markets-summary-pill .pulse{width:8px;height:8px;background:#0a7a3f;border-radius:50%;flex-shrink:0;box-shadow:0 0 0 4px rgba(10,122,63,0.18)}
-  .markets-summary-pill.expanding .pulse{background:#b8730a;box-shadow:0 0 0 4px rgba(184,115,10,0.18)}
-  .markets-summary-pill.soon .pulse{background:var(--slate);box-shadow:none;animation:none}
+  .markets-list{display:flex;flex-direction:column;gap:0;border-top:1px solid var(--line-dark)}
+  .markets-summary{display:flex;gap:16px;flex-wrap:wrap;padding:0 0 24px;margin-bottom:0;border-bottom:1px solid var(--line-dark);grid-column:1/-1}
+  .markets-summary-pill{display:inline-flex;align-items:center;gap:10px;padding:10px 16px;background:rgba(232,92,13,0.07);border:1px solid transparent;border-radius:100px;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:var(--paper);position:relative;isolation:isolate}
+  .markets-summary-pill::before{content:'';position:absolute;inset:0;border-radius:100px;background:linear-gradient(135deg,rgba(255,122,47,0.55) 0%,rgba(196,74,0,0.1) 35%,rgba(255,255,255,0.04) 60%,rgba(255,122,47,0.35) 100%);padding:1px;-webkit-mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);-webkit-mask-composite:destination-out;mask-composite:exclude;z-index:-1}
+  .markets-summary-pill .pulse{width:8px;height:8px;background:#4ADE80;border-radius:50%;flex-shrink:0;box-shadow:0 0 0 4px rgba(74,222,128,0.2)}
+  .markets-summary-pill.expanding .pulse{background:#E8A93B;box-shadow:0 0 0 4px rgba(232,169,59,0.18)}
+  .markets-summary-pill.soon .pulse{background:rgba(237,235,230,0.3);box-shadow:none}
   .markets-summary-pill .ct{font-weight:700;font-size:13px;letter-spacing:0.04em}
-  .market-row{display:grid;grid-template-columns:60px 1fr 100px;gap:16px;padding:18px 0;border-bottom:1px solid var(--line);align-items:center;transition:background .15s}
-  .market-row:hover{background:var(--paper-warm)}
+  .market-row{display:grid;grid-template-columns:60px 1fr 100px;gap:16px;padding:18px 0;border-bottom:1px solid var(--line-dark);align-items:center;transition:background .15s}
+  .market-row:hover{background:rgba(232,92,13,0.05)}
   .market-row.is-soon,.market-row.is-expanding{opacity:0.72}
-  .market-row .code{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.14em;color:var(--slate);text-transform:uppercase}
-  .market-row .name{font-family:'Plus Jakarta Sans',sans-serif;font-weight:600;font-size:16px;letter-spacing:-0.015em}
+  .market-row .code{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.14em;color:var(--fire-bright);text-transform:uppercase}
+  .market-row .name{font-family:'Plus Jakarta Sans',sans-serif;font-weight:600;font-size:16px;letter-spacing:-0.015em;color:var(--paper)}
   .market-row .status{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.14em;text-transform:uppercase;text-align:right}
-  .status.live{color:#0a7a3f}
-  .status.expanding{color:var(--slate)}
-  .status.soon{color:#b8730a}
-  .status.ready{color:var(--slate)}
-  /* Reach on dark */
+  .status.live{color:#4ADE80}
+  .status.expanding{color:rgba(237,235,230,0.5)}
+  .status.soon{color:#E8A93B}
+  .status.ready{color:rgba(237,235,230,0.5)}
+  /* Reach on dark — same styles, remove old overrides */
   .section--dark .reach-stats{border-top-color:var(--line-dark);border-bottom-color:var(--line-dark)}
   .section--dark .reach-stat{border-right-color:var(--line-dark)}
-  .section--dark .reach-stat .lbl{color:rgba(244,241,234,0.6)}
+  .section--dark .reach-stat .lbl{color:rgba(237,235,230,0.45)}
   .section--dark .markets-list,.section--dark .markets-summary{border-top-color:var(--line-dark);border-bottom-color:var(--line-dark)}
-  .section--dark .markets-summary-pill{background:rgba(244,241,234,0.05);border-color:var(--line-dark);color:var(--paper)}
-  .section--dark .markets-summary-pill .pulse{background:#52C53F;box-shadow:0 0 0 4px rgba(82,197,63,0.16)}
+  .section--dark .markets-summary-pill{background:rgba(232,92,13,0.07);border-color:transparent;color:var(--paper)}
+  .section--dark .markets-summary-pill .pulse{background:#4ADE80;box-shadow:0 0 0 4px rgba(74,222,128,0.18)}
   .section--dark .markets-summary-pill.expanding .pulse{background:#E8A93B;box-shadow:0 0 0 4px rgba(232,169,59,0.18)}
-  .section--dark .markets-summary-pill.soon .pulse{background:rgba(244,241,234,0.4)}
+  .section--dark .markets-summary-pill.soon .pulse{background:rgba(237,235,230,0.3)}
   .section--dark .market-row{border-bottom-color:var(--line-dark)}
-  .section--dark .market-row:hover{background:rgba(244,241,234,0.04)}
-  .section--dark .market-row .code{color:rgba(244,241,234,0.55)}
-  .section--dark .status.live{color:#52C53F}
-  .section--dark .status.expanding{color:rgba(244,241,234,0.6)}
+  .section--dark .market-row:hover{background:rgba(232,92,13,0.05)}
+  .section--dark .market-row .code{color:var(--fire-bright)}
+  .section--dark .status.live{color:#4ADE80}
+  .section--dark .status.expanding{color:rgba(237,235,230,0.5)}
   .section--dark .status.soon{color:#E8A93B}
-  .section--dark .status.ready{color:rgba(244,241,234,0.6)}
+  .section--dark .status.ready{color:rgba(237,235,230,0.5)}
   @media (max-width:840px){.reach{gap:32px}.reach-stats{grid-template-columns:repeat(2,1fr)}.reach-stat:nth-child(2){border-right:none}.markets-grid{grid-template-columns:1fr}}
 
+  .channels-section{position:relative}
+  .channels-section::before,.channels-section::after{content:'';position:absolute;left:0;right:0;height:280px;pointer-events:none;z-index:1}
+  .channels-section::before{top:0;background:linear-gradient(to bottom,#08080A 0%,transparent 100%)}
+  .channels-section::after{bottom:0;background:linear-gradient(to top,#08080A 0%,transparent 100%)}
+  .channels-section .container{position:relative;z-index:2}
+
   /* CHANNELS GRID */
-  .channels{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line)}
-  .channel{background:var(--paper);padding:28px 24px;display:flex;flex-direction:column;gap:12px;transition:background .2s,color .2s;cursor:default;min-height:160px;justify-content:space-between}
-  .channel:hover{background:var(--ink);color:var(--paper)}
-  .channel:hover .channel-meta{color:rgba(244,241,234,0.6)}
-  .channel-name{font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;font-size:18px;letter-spacing:-0.02em}
-  .channel-meta{font-size:11px;font-family:'JetBrains Mono',monospace;letter-spacing:0.06em;color:var(--slate);text-transform:uppercase}
+  .channels{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;background:transparent;border:none}
+  .channel{background:rgba(14,14,17,0.55);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);padding:28px 24px;display:flex;flex-direction:column;gap:12px;cursor:default;min-height:160px;justify-content:space-between;border-radius:16px;border:1px solid transparent;position:relative;transition:transform .2s}
+  .channel::before{content:'';position:absolute;inset:0;border-radius:16px;padding:1px;background:linear-gradient(135deg,rgba(255,122,47,0.55) 0%,rgba(196,74,0,0.1) 35%,rgba(255,255,255,0.04) 60%,rgba(255,122,47,0.35) 100%);-webkit-mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);-webkit-mask-composite:destination-out;mask-composite:exclude;pointer-events:none}
+  .channel:hover{transform:translateY(-2px)}
+  .channel:hover .channel-meta{color:rgba(237,235,230,0.5)}
+  .channel:hover .channel-name{color:var(--fire-bright)}
+  .channel-name{font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;font-size:18px;letter-spacing:-0.02em;color:var(--paper);transition:color .2s}
+  .channel-meta{font-size:11px;font-family:'JetBrains Mono',monospace;letter-spacing:0.06em;color:rgba(237,235,230,0.4);text-transform:uppercase}
   @media (max-width:840px){.channels{grid-template-columns:repeat(2,1fr)}}
   @media (max-width:480px){.channels{grid-template-columns:1fr}}
 
   /* WHY (4 cards) */
-  .why{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--line);border:1px solid var(--line)}
-  .why-card{background:var(--paper);padding:36px 32px;display:flex;flex-direction:column;gap:14px}
-  .why-num{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.16em;color:var(--slate);text-transform:uppercase}
-  .why-title{font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;font-size:24px;letter-spacing:-0.025em;line-height:1.15}
-  .why-body{font-size:14px;line-height:1.6;color:var(--slate)}
+  .why{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--line);border:1px solid transparent;position:relative;border-radius:16px;overflow:hidden}
+  .why::before{content:'';position:absolute;inset:0;border-radius:16px;padding:1px;background:linear-gradient(135deg,rgba(255,122,47,0.55) 0%,rgba(196,74,0,0.1) 35%,rgba(255,255,255,0.04) 60%,rgba(255,122,47,0.35) 100%);-webkit-mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);-webkit-mask-composite:destination-out;mask-composite:exclude;pointer-events:none;z-index:1}
+  .why-card{background:var(--section-a);padding:36px 32px;display:flex;flex-direction:column;gap:14px;transition:background .2s}
+  .why-card:hover{background:#120B05}
+  .why-num{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.16em;color:var(--fire);text-transform:uppercase;opacity:0.7}
+  .why-title{font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;font-size:24px;letter-spacing:-0.025em;line-height:1.15;color:var(--paper)}
+  .why-body{font-size:14px;line-height:1.6;color:rgba(237,235,230,0.55)}
   @media (max-width:720px){.why{grid-template-columns:1fr}}
 
   /* RESULTS */
   .cases{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
-  .case{background:var(--paper-warm);padding:32px 28px;display:flex;flex-direction:column;gap:24px;min-height:340px;transition:transform .2s}
+  .case{background:#0E0E11;border:1px solid transparent;background-clip:padding-box;border-radius:16px;padding:32px 28px;display:flex;flex-direction:column;gap:24px;min-height:340px;transition:transform .2s;position:relative}
+  .case::before{content:'';position:absolute;inset:0;border-radius:inherit;padding:1px;background:linear-gradient(135deg,rgba(255,122,47,0.55) 0%,rgba(196,74,0,0.1) 35%,rgba(255,255,255,0.04) 60%,rgba(255,122,47,0.35) 100%);-webkit-mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);-webkit-mask-composite:destination-out;mask-composite:exclude;pointer-events:none}
   .case:hover{transform:translateY(-2px)}
-  .case-meta{display:flex;justify-content:space-between;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.16em;text-transform:uppercase;color:var(--slate)}
-  .case-stat{font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:64px;letter-spacing:-0.05em;line-height:0.9}
-  .case-title{font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;font-size:20px;letter-spacing:-0.02em;line-height:1.2;flex:1}
-  .case-detail{font-size:13px;line-height:1.55;color:var(--slate)}
-  /* Cases on dark */
-  .section--dark .case{background:rgba(244,241,234,0.04);border:1px solid var(--line-dark)}
-  .section--dark .case-meta{color:rgba(244,241,234,0.55)}
-  .section--dark .case-detail{color:rgba(244,241,234,0.65)}
+  .case-meta{display:flex;justify-content:space-between;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.16em;text-transform:uppercase;color:rgba(237,235,230,0.4)}
+  .case-stat{font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:64px;letter-spacing:-0.05em;line-height:0.9;color:var(--fire)}
+  .case-title{font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;font-size:20px;letter-spacing:-0.02em;line-height:1.2;flex:1;color:var(--paper)}
+  .case-detail{font-size:13px;line-height:1.55;color:rgba(237,235,230,0.55)}
+  .section--dark .case{background:#120D07;border:1px solid var(--line-dark)}
+  .section--dark .case-meta{color:rgba(237,235,230,0.4)}
+  .section--dark .case-detail{color:rgba(237,235,230,0.55)}
   @media (max-width:840px){.cases{grid-template-columns:1fr}}
 
   /* PROCESS */
@@ -258,51 +303,52 @@
   .step{padding:36px 24px 36px 0;border-bottom:1px solid var(--line);display:flex;flex-direction:column;gap:14px}
   .step:not(:last-child){border-right:1px solid var(--line);padding-right:24px}
   .step:not(:first-child){padding-left:24px}
-  .step-num{font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:48px;letter-spacing:-0.04em;line-height:1;color:var(--stone)}
-  .step-title{font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;font-size:20px;letter-spacing:-0.02em}
-  .step-body{font-size:13px;line-height:1.55;color:var(--slate)}
+  .step-num{font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:48px;letter-spacing:-0.04em;line-height:1;color:var(--fire-bright)}
+  .step-title{font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;font-size:20px;letter-spacing:-0.02em;color:var(--paper)}
+  .step-body{font-size:13px;line-height:1.55;color:rgba(237,235,230,0.55)}
   @media (max-width:840px){.process{grid-template-columns:repeat(2,1fr)}.step:nth-child(2){border-right:none}.step:nth-child(3){padding-left:0;border-right:1px solid var(--line)}.step:nth-child(4){padding-left:24px}}
   @media (max-width:480px){.process{grid-template-columns:1fr}.step{border-right:none!important;padding-right:0!important;padding-left:0!important}}
 
   /* CONTACT FORM */
-  .contact{background:var(--ink);color:var(--paper);padding:120px 0}
+  .contact{background:var(--section-c);color:var(--paper);padding:120px 0}
   .contact .section-head h2{color:var(--paper)}
-  .contact .section-head p{color:rgba(244,241,234,0.65)}
-  .contact .eyebrow{color:rgba(244,241,234,0.55)}
+  .contact .section-head p{color:rgba(237,235,230,0.6)}
+  .contact .eyebrow{color:var(--fire-bright)}
   .form{display:grid;grid-template-columns:1fr 1fr;gap:24px;max-width:880px}
   .form-row{display:flex;flex-direction:column;gap:8px}
   .form-row.full{grid-column:1/-1}
-  .form-row label{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.18em;text-transform:uppercase;color:rgba(244,241,234,0.55)}
-  .form-row input,.form-row textarea,.form-row select{background:transparent;border:none;border-bottom:1px solid var(--line-dark);padding:12px 0;color:var(--paper);font-size:16px;outline:none;transition:border-color .15s}
-  .form-row input:focus,.form-row textarea:focus,.form-row select:focus{border-color:var(--paper)}
+  .form-row label{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.18em;text-transform:uppercase;color:var(--fire-bright)}
+  .form-row input,.form-row textarea,.form-row select{background:transparent;border:none;border-bottom:1px solid rgba(255,122,47,0.35);padding:12px 0;color:var(--paper);font-size:16px;outline:none;transition:border-color .15s}
+  .form-row input:focus,.form-row textarea:focus,.form-row select:focus{border-color:var(--fire-bright)}
   .form-row textarea{resize:vertical;min-height:80px}
-  .form-row select{appearance:none;-webkit-appearance:none;background-image:linear-gradient(45deg,transparent 50%,var(--paper) 50%),linear-gradient(135deg,var(--paper) 50%,transparent 50%);background-position:calc(100% - 14px) 16px,calc(100% - 8px) 16px;background-size:6px 6px,6px 6px;background-repeat:no-repeat;padding-right:32px}
-  .form-row select option{background:var(--ink);color:var(--paper)}
+  .form-row select{appearance:none;-webkit-appearance:none;background-image:linear-gradient(45deg,transparent 50%,var(--fire-bright) 50%),linear-gradient(135deg,var(--fire-bright) 50%,transparent 50%);background-position:calc(100% - 14px) 16px,calc(100% - 8px) 16px;background-size:6px 6px,6px 6px;background-repeat:no-repeat;padding-right:32px}
+  .form-row select option{background:#0D0A06;color:var(--paper)}
   .chip-group{display:flex;flex-wrap:wrap;gap:8px}
-  .chip{padding:8px 14px;border:1px solid var(--line-dark);font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:rgba(244,241,234,0.7);cursor:pointer;transition:all .15s;user-select:none}
-  .chip:hover{color:var(--paper);border-color:var(--paper-warm)}
-  .chip.active{background:var(--paper);color:var(--ink);border-color:var(--paper)}
-  .form-submit{margin-top:8px;background:var(--paper);color:var(--ink);padding:18px 24px;font-size:14px;font-weight:700;display:inline-flex;align-items:center;gap:10px;transition:background .15s;border:none;cursor:pointer;letter-spacing:0.02em}
-  .form-submit:hover{background:var(--paper-warm)}
+  .chip{padding:8px 14px;border:1px solid var(--line-dark);font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:rgba(237,235,230,0.6);cursor:pointer;transition:all .15s;user-select:none}
+  .chip:hover{color:var(--paper);border-color:rgba(232,92,13,0.4)}
+  .chip.active{background:var(--fire);color:var(--paper);border-color:var(--fire)}
+  .form-submit{margin-top:8px;background:linear-gradient(135deg,#FF7A2F 0%,#C44A00 100%);color:var(--paper);padding:18px 32px;font-size:14px;font-weight:700;display:inline-flex;align-items:center;gap:10px;transition:opacity .15s,transform .15s;border:none;cursor:pointer;letter-spacing:0.02em;border-radius:100px}
+  .form-submit:hover{opacity:0.88;transform:translateY(-1px)}
   @media (max-width:720px){.form{grid-template-columns:1fr}}
 
   /* FOOTER */
-  footer{background:var(--ink);color:var(--paper);padding:80px 0 32px;border-top:1px solid var(--line-dark)}
-  .footer-grid{display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:48px;padding-bottom:64px;border-bottom:1px solid var(--line-dark)}
+  footer{background:var(--section-c);color:var(--paper);padding:80px 0 32px;border-top:1px solid var(--line-dark)}
+  .footer-grid{display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:48px;padding-bottom:48px}
   .footer-brand{display:flex;flex-direction:column;gap:24px}
-  .footer-tagline{font-family:'Plus Jakarta Sans',sans-serif;font-weight:300;font-size:24px;letter-spacing:-0.025em;line-height:1.2;color:rgba(244,241,234,0.85);max-width:340px}
-  .footer-parent{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.18em;text-transform:uppercase;color:rgba(244,241,234,0.5)}
-  .footer-col h4{margin:0 0 18px;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.18em;text-transform:uppercase;color:rgba(244,241,234,0.5);font-weight:400}
+  .footer-tagline{font-family:'Plus Jakarta Sans',sans-serif;font-weight:300;font-size:24px;letter-spacing:-0.025em;line-height:1.2;color:rgba(237,235,230,0.85);max-width:340px}
+  .footer-parent{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.18em;text-transform:uppercase;color:var(--fire-bright)}
+  .footer-col h4{margin:0 0 18px;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.18em;text-transform:uppercase;color:var(--fire-bright);font-weight:400}
   .footer-col ul{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:10px;font-size:14px}
-  .footer-col li,.footer-col li a{color:rgba(244,241,234,0.85);transition:color .15s}
-  .footer-col li a:hover{color:var(--paper-warm)}
-  .footer-bottom{display:flex;justify-content:space-between;align-items:center;padding-top:32px;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:rgba(244,241,234,0.4);flex-wrap:wrap;gap:16px}
+  .footer-col li,.footer-col li a{color:rgba(237,235,230,0.7);transition:color .15s}
+  .footer-col li a:hover{color:var(--fire-bright)}
+  .footer-bottom{display:flex;justify-content:space-between;align-items:center;padding-top:48px;border-top:1px solid var(--line-dark);font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:rgba(237,235,230,0.3);flex-wrap:wrap;gap:16px}
   .footer-bottom span{display:inline-flex;align-items:center;gap:14px}
   @media (max-width:840px){.footer-grid{grid-template-columns:1fr 1fr;gap:32px}}
   @media (max-width:560px){.footer-grid{grid-template-columns:1fr}}
-  .marquee{padding:80px 0 40px;border-top:1px solid var(--line-dark);overflow:hidden}
-  .marquee-word{font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:clamp(80px,18vw,260px);letter-spacing:-0.06em;line-height:0.85;color:rgba(244,241,234,0.06);white-space:nowrap;text-align:center;user-select:none}
-  ::selection{background:var(--ink);color:var(--paper)}
+  .marquee{padding:4px 0 0;overflow:hidden;position:relative;margin-bottom:48px}
+  .marquee-word{font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:clamp(80px,18vw,260px);letter-spacing:-0.06em;line-height:1;color:rgba(232,92,13,0.06);white-space:nowrap;text-align:center;user-select:none;transform:translateY(25%);display:block}
+  .lava-ripple{position:absolute;top:0;left:50%;transform:translateX(-50%);opacity:0.5;pointer-events:none}
+  ::selection{background:var(--fire);color:var(--paper)}
 </style>
 </head>
 <body>
@@ -310,10 +356,7 @@
 <nav class="nav">
   <div class="container nav-inner">
     <a href="#top" class="brand" aria-label="WagerAds home">
-      <svg width="32" height="32" viewBox="0 0 64 64" fill="none">
-        <rect x="0" y="0" width="64" height="64" rx="14" fill="#0B0B0C"/>
-        <path d="M 14 18 L 22 46 L 32 26 L 42 46 L 50 18" stroke="#F4F1EA" stroke-width="3.2" stroke-linecap="square" stroke-linejoin="miter" fill="none"/>
-      </svg>
+      <img src="icons/icone-laranja-wagerads.svg" width="40" height="40" alt="" style="border-radius:9px" />
       <span class="brand-text">wagerads</span>
     </a>
     <div class="nav-links">
@@ -337,99 +380,269 @@
 
 <!-- HERO -->
 <section class="hero" id="top">
-  <div class="container">
-    <div class="hero-grid">
-      <div>
-        <div class="eyebrow" style="margin-bottom:32px" data-i18n="hero.eyebrow">Performance Media · LATAM-first · Global-ready</div>
-        <h1 class="display"><span class="hero-title-text"><span data-i18n="hero.title">Bet on math</span><span class="punct">.</span></span></h1>
-        <p class="hero-sub" data-i18n="hero.sub">We buy media for operators who move real volume.</p>
-        <p class="hero-lead" data-i18n="hero.lead">End-to-end acquisition for the iGaming industry. Creative, tracking, and paid media — under one roof, calibrated for regulated, gray-market, and unregulated environments.</p>
-        <div class="hero-actions">
-          <a href="#contact" class="btn-primary"><span data-i18n="hero.cta1">Book a meeting</span> <span aria-hidden="true">→</span></a>
-          <a href="#contact" class="btn-secondary" data-i18n="hero.cta2">Get a free 60-min audit</a>
-        </div>
+  <!-- Gradient overlay for text legibility -->
+  <div class="hero-overlay" aria-hidden="true"></div>
+
+  <!-- Main centred content -->
+  <div class="hero-content">
+    <div class="hero-badge">
+      <svg viewBox="0 0 12 12" aria-hidden="true"><path d="M7 0L1 7h5l-1 5 6-7H6z"/></svg>
+      <span data-i18n="hero.eyebrow">Performance Media</span>
+    </div>
+    <h1 class="display">
+      <span data-i18n="hero.title">Bet on math</span><span class="accent">.</span>
+    </h1>
+    <p class="hero-lead" data-i18n="hero.lead">End-to-end acquisition for the iGaming industry. Creative, tracking, and paid media — under one roof, calibrated for regulated, gray-market, and unregulated environments.</p>
+    <div class="hero-actions">
+      <a href="#contact" class="btn-primary"><span data-i18n="hero.cta1">Book a meeting</span> <span aria-hidden="true">→</span></a>
+      <a href="#contact" class="btn-secondary" data-i18n="hero.cta2">Get a free 60-min audit</a>
+    </div>
+  </div>
+
+  <div class="hero-pillars-fade" aria-hidden="true"></div>
+
+  <!-- Feature pillars strip -->
+  <div class="hero-pillars">
+    <div class="hero-pillar">
+      <div class="hero-pillar-hex">
+        <svg class="hex-bg" viewBox="0 0 44 44" aria-hidden="true"><polygon points="22,2 40,12 40,32 22,42 4,32 4,12" fill="none" stroke="rgba(232,92,13,0.45)" stroke-width="1.5"/></svg>
+        <svg class="hex-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
       </div>
-      <div class="hero-side">
-        <div class="hero-side-top">
-          <div class="eyebrow" data-i18n="hero.snapshot">↳ The numbers</div>
-          <p style="margin:0;font-size:13px;line-height:1.6;color:var(--slate);max-width:380px" data-i18n="hero.snapshot.desc">Aggregate across operators we currently serve. Reported in cohort, validated by holdout — never last-click.</p>
+      <div class="hero-pillar-text">
+        <strong data-i18n="hero.p1.title">Blazing Performance</strong>
+        <span data-i18n="hero.p1.sub">ROAS-driven, holdout-validated</span>
+      </div>
+    </div>
+    <div class="hero-pillar">
+      <div class="hero-pillar-hex">
+        <svg class="hex-bg" viewBox="0 0 44 44" aria-hidden="true"><polygon points="22,2 40,12 40,32 22,42 4,32 4,12" fill="none" stroke="rgba(232,92,13,0.45)" stroke-width="1.5"/></svg>
+        <svg class="hex-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      </div>
+      <div class="hero-pillar-text">
+        <strong data-i18n="hero.p2.title">Highly Reliable</strong>
+        <span data-i18n="hero.p2.sub">Server-side tracking by default</span>
+      </div>
+    </div>
+    <div class="hero-pillar">
+      <div class="hero-pillar-hex">
+        <svg class="hex-bg" viewBox="0 0 44 44" aria-hidden="true"><polygon points="22,2 40,12 40,32 22,42 4,32 4,12" fill="none" stroke="rgba(232,92,13,0.45)" stroke-width="1.5"/></svg>
+        <svg class="hex-icon" viewBox="0 0 24 24" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+      </div>
+      <div class="hero-pillar-text">
+        <strong data-i18n="hero.p3.title">Operator-First</strong>
+        <span data-i18n="hero.p3.sub">Built for $100K+/mo spend</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STACK — 4 PILLARS -->
+<section class="section" id="stack" style="padding-bottom:48px">
+  <div class="container">
+    <div class="section-head" style="grid-template-columns:1fr">
+      <div style="max-width:1000px">
+        <div class="eyebrow" style="margin-bottom:16px" data-i18n="stack.eyebrow">01 · Our stack</div>
+        <h2 class="display" style="font-size:clamp(36px,4.5vw,56px)" data-i18n="stack.title" data-i18n-html="true">Não viramos especialistas em iGaming atendendo clientes.</h2>
+        <p class="stack-sub" data-i18n="stack.sub">Nossa expertise vem de quem já esteve do outro lado e construiu uma operação relevante antes de gerenciar a sua.</p>
+      </div>
+    </div>
+    <div class="cases" style="margin-bottom:64px">
+      <div class="case">
+        <div class="case-meta"><span data-i18n="rs.1.meta">BR · Sportsbook</span><span data-i18n="rs.1.window">12 mo · 2024–25</span></div>
+        <div class="case-stat">140K</div>
+        <div class="case-title" data-i18n="rs.1.title">FTDs at 20× ROAS, sustained 12 months.</div>
+        <div class="case-detail" data-i18n="rs.1.detail">Scaled Brazilian sportsbook from $400K to $3M monthly media spend without ROAS decay. Holdout-validated.</div>
+      </div>
+      <div class="case">
+        <div class="case-meta"><span data-i18n="rs.2.meta">CA · Casino</span><span data-i18n="rs.2.window">Q3 2025</span></div>
+        <div class="case-stat">$1M+</div>
+        <div class="case-title" data-i18n="rs.2.title">Monthly deposits at $200 average ticket.</div>
+        <div class="case-detail" data-i18n="rs.2.detail">Central America casino operator. Server-side tracking + WhatsApp direct compounded LTV beyond first deposit.</div>
+      </div>
+      <div class="case">
+        <div class="case-meta"><span data-i18n="rs.3.meta">LATAM · Gray</span><span data-i18n="rs.3.window">90 days</span></div>
+        <div class="case-stat">0 → $2M</div>
+        <div class="case-title" data-i18n="rs.3.title">Cold launch to $2M monthly in 90 days.</div>
+        <div class="case-detail" data-i18n="rs.3.detail">Greenfield gray-market operator. Creative, tracking, and traffic stood up in week one. ROAS positive by day 30.</div>
+      </div>
+    </div>
+    </div>
+  </div>
+</section>
+
+<!-- CHANNELS -->
+<section class="section channels-section" style="padding-top:0;background:#08080A url('imgs/background-section-wagerads.webp') center center / cover no-repeat">
+  <div class="container">
+    <div class="section-head">
+      <div>
+        <div class="eyebrow" style="margin-bottom:16px" data-i18n="chn.eyebrow">02 · Channels</div>
+        <h2 class="display" data-i18n="chn.title">Every surface that converts.</h2>
+      </div>
+      <p data-i18n="chn.lead">One team, one budget, eight surfaces. Reallocation happens in hours, not quarters — because the buyer, the trafficker, and the analyst sit on the same call.</p>
+    </div>
+    <div class="channels">
+      <div class="channel"><div class="channel-name">Google Ads</div><div class="channel-meta">Search · YouTube · UAC</div></div>
+      <div class="channel"><div class="channel-name">Meta</div><div class="channel-meta">Facebook · Instagram</div></div>
+      <div class="channel"><div class="channel-name">TikTok</div><div class="channel-meta">Feed · Spark · Branded</div></div>
+      <div class="channel"><div class="channel-name">Kwai</div><div class="channel-meta" data-i18n="chn.kwai.meta">LATAM-native short video</div></div>
+      <div class="channel"><div class="channel-name">Native</div><div class="channel-meta">Taboola · Outbrain</div></div>
+      <div class="channel"><div class="channel-name">Programmatic</div><div class="channel-meta">DV360 · TradeDesk</div></div>
+      <div class="channel"><div class="channel-name" data-i18n="chn.email.name">Email + SMS</div><div class="channel-meta" data-i18n="chn.email.meta">First-party blasts</div></div>
+      <div class="channel"><div class="channel-name">WhatsApp</div><div class="channel-meta" data-i18n="chn.wa.meta">LATAM direct response</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- QUOTE / DARK BAND -->
+<!-- REACH / MARKETS -->
+<section class="section" id="reach">
+  <div class="container">
+    <div class="section-head">
+      <div>
+        <div class="eyebrow" style="margin-bottom:16px" data-i18n="rch.eyebrow">03 · Reach</div>
+        <h2 class="display" style="font-size:clamp(28px,3.8vw,48px);max-width:1100px" data-i18n="rch.title" data-i18n-html="true">Regulado ou não. Perto ou longe, o resultado é o mesmo.</h2>
+      </div>
+      <p data-i18n="rch.lead">Local language, local payment rails, local compliance — without sacrificing the analytical depth international operators expect. Built for the region the global agency networks under-serve.</p>
+    </div>
+    <div class="reach">
+      <div class="reach-stats">
+        <div class="reach-stat"><div class="num">10+</div><div class="lbl" data-i18n="rch.s1">Markets · live</div></div>
+        <div class="reach-stat"><div class="num">5+</div><div class="lbl" data-i18n="rch.s2">Markets · expanding</div></div>
+        <div class="reach-stat"><div class="num">3</div><div class="lbl" data-i18n="rch.s3">Languages · in-house</div></div>
+        <div class="reach-stat"><div class="num">24/7</div><div class="lbl" data-i18n="rch.s4">Buying coverage</div></div>
+      </div>
+      <div class="markets-summary">
+        <div class="markets-summary-pill"><span class="pulse"></span><span class="ct">8</span> <span data-i18n="rch.live">Live</span></div>
+        <div class="markets-summary-pill expanding"><span class="pulse"></span><span class="ct">2</span> <span data-i18n="rch.ready">Ready to expand</span></div>
+        <div class="markets-summary-pill soon"><span class="pulse"></span><span class="ct">1</span> <span data-i18n="rch.soon">Launching soon</span></div>
+      </div>
+      <div class="markets-grid">
+        <div class="markets-list">
+          <div class="market-row"><span class="code">BR</span><span class="name">Brazil</span><span class="status live" data-i18n="rch.live">● Live</span></div>
+          <div class="market-row"><span class="code">MX</span><span class="name">Mexico</span><span class="status live" data-i18n="rch.live">● Live</span></div>
+          <div class="market-row"><span class="code">CO</span><span class="name">Colombia</span><span class="status live" data-i18n="rch.live">● Live</span></div>
+          <div class="market-row"><span class="code">PE</span><span class="name">Peru</span><span class="status live" data-i18n="rch.live">● Live</span></div>
+          <div class="market-row"><span class="code">CL</span><span class="name">Chile</span><span class="status live" data-i18n="rch.live">● Live</span></div>
+        </div>
+        <div class="markets-list">
+          <div class="market-row"><span class="code">AR</span><span class="name">Argentina</span><span class="status live" data-i18n="rch.live">● Live</span></div>
+          <div class="market-row"><span class="code">CA</span><span class="name" data-i18n="rch.ca">Central America</span><span class="status live" data-i18n="rch.live">● Live</span></div>
+          <div class="market-row is-soon"><span class="code">AF</span><span class="name" data-i18n="rch.africa">Africa</span><span class="status soon" data-i18n="rch.soon">◐ Launching soon</span></div>
+          <div class="market-row is-expanding"><span class="code">NA</span><span class="name" data-i18n="rch.na">North America</span><span class="status ready" data-i18n="rch.ready">→ Ready to expand</span></div>
+          <div class="market-row is-expanding"><span class="code">EU</span><span class="name" data-i18n="rch.eu">Europe</span><span class="status ready" data-i18n="rch.ready">→ Ready to expand</span></div>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- HERO STATS BAND -->
-<div class="hero-stats-band">
-  <div class="container">
-    <div class="hero-stats-band-inner">
-      <div class="hero-stat"><div class="num">$10M+</div><div class="lbl" data-i18n="hero.s1">Managed in paid media</div></div>
-      <div class="hero-stat"><div class="num">140K+</div><div class="lbl" data-i18n="hero.s2">FTDs delivered · 12 mo</div></div>
-      <div class="hero-stat"><div class="num">10+</div><div class="lbl" data-i18n="hero.s3">Active LATAM markets</div></div>
-      <div class="hero-stat"><div class="num">20×</div><div class="lbl" data-i18n="hero.s4">Avg. ROAS · top cohort</div></div>
-    </div>
-  </div>
-</div>
-
-<!-- TICKER -->
-<div class="ticker">
-  <div class="container ticker-inner">
-    <div class="ticker-label" data-i18n="ticker.left">↳ Operators on the stack</div>
-    <div class="ticker-marks">
-      <span data-i18n="ticker.confidential">Names confidential under NDA</span>
-    </div>
-    <div class="ticker-label">2024 — 2026</div>
-  </div>
-</div>
-
-<!-- STACK — 4 PILLARS -->
-<section class="section" id="stack">
+<!-- WHY WAGERADS -->
+<section class="section" style="padding-top:0;padding-bottom:48px">
   <div class="container">
     <div class="section-head">
       <div>
-        <div class="eyebrow" style="margin-bottom:16px" data-i18n="stack.eyebrow">01 · Our stack</div>
-        <h2 class="display" data-i18n="stack.title" data-i18n-html="true">Four pillars.<br/>One operator.</h2>
+        <div class="eyebrow" style="margin-bottom:16px" data-i18n="why.eyebrow">04 · Why WagerAds</div>
+        <h2 class="display" style="font-size:clamp(32px,4vw,52px);max-width:900px" data-i18n="why.title">Não somos a maior agência do mercado. Somos a melhor.</h2>
       </div>
-      <p data-i18n="stack.lead">Most agencies operate one slice and outsource the rest. We run creative, tracking, paid media, and direct-response channels in-house — the same team owns the dossier from concept to deposit.</p>
+      <p data-i18n="why.lead">Four reasons operators with $100K+/month in paid media work with us instead of legacy agency networks.</p>
     </div>
-    <div class="stack">
-      <div class="pillar">
-        <div class="pillar-icon">①</div>
-        <div class="pillar-num" data-i18n="stack.1.num">01 / Creative</div>
-        <div class="pillar-title" data-i18n="stack.1.title">Concepts that pass compliance and convert.</div>
-        <div class="pillar-body" data-i18n="stack.1.body">Static, video, and UGC built specifically for sportsbook and casino. 30+ concepts/month, graded by FTD performance — not CTR theater.</div>
+    <div class="why">
+      <div class="why-card">
+        <div class="why-num">01</div>
+        <div class="why-title" data-i18n="why.1.title">End-to-end, in one room.</div>
+        <div class="why-body" data-i18n="why.1.body">Creative studio, server-side tracking, media buying, and direct response — all in-house. No vendor pass-throughs, no finger-pointing on attribution.</div>
       </div>
-      <div class="pillar">
-        <div class="pillar-icon">②</div>
-        <div class="pillar-num" data-i18n="stack.2.num">02 / Tracking</div>
-        <div class="pillar-title" data-i18n="stack.2.title">Server-side, audited, yours to own.</div>
-        <div class="pillar-body" data-i18n="stack.2.body">Proprietary server-side container with Meta CAPI, TikTok Events API, and clean attribution storage. iOS 14+ proof. Walled gardens stop being a black box.</div>
+      <div class="why-card">
+        <div class="why-num">02</div>
+        <div class="why-title" data-i18n="why.2.title">Multi-market fluency.</div>
+        <div class="why-body" data-i18n="why.2.body">Native PT-BR, ES-LATAM, and EN creative leads. Local payment rails (Pix, SPEI, PSE, SEPA) modeled into the funnel from day one.</div>
       </div>
-      <div class="pillar">
-        <div class="pillar-icon">③</div>
-        <div class="pillar-num" data-i18n="stack.3.num">03 / Traffic</div>
-        <div class="pillar-title" data-i18n="stack.3.title">Paid media across every surface that moves volume.</div>
-        <div class="pillar-body" data-i18n="stack.3.body">Google, Meta, TikTok, Kwai, native, programmatic — operated as one budget, reallocated weekly on incremental lift.</div>
+      <div class="why-card">
+        <div class="why-num">03</div>
+        <div class="why-title" data-i18n="why.3.title">Performance is the contract.</div>
+        <div class="why-body" data-i18n="why.3.body">We work toward CPA, ROAS, and NGR targets — not impressions. Every retainer ties to a holdout-validated outcome we agree on in writing.</div>
       </div>
-      <div class="pillar">
-        <div class="pillar-icon">④</div>
-        <div class="pillar-num" data-i18n="stack.4.num">04 / Direct</div>
-        <div class="pillar-title" data-i18n="stack.4.title">Email, SMS, and WhatsApp blasts at LATAM scale.</div>
-        <div class="pillar-body" data-i18n="stack.4.body">First-party lists and direct-response engines that re-activate dormant cohorts and compound LTV after the install.</div>
+      <div class="why-card">
+        <div class="why-num">04</div>
+        <div class="why-title" data-i18n="why.4.title">Regulated, gray, unregulated — fluent in all three.</div>
+        <div class="why-body" data-i18n="why.4.body">We've launched into freshly-regulated markets, scaled gray operations, and run lean in unregulated zones. We know the difference and we play to it.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW WE WORK -->
+<section class="section" style="padding-top:48px;padding-bottom:48px">
+  <div class="container">
+    <div class="section-head">
+      <div>
+        <div class="eyebrow" style="margin-bottom:16px" data-i18n="hw.eyebrow">05 · How we work</div>
+        <h2 class="display" data-i18n="hw.title">From audit to scale, in four moves.</h2>
+      </div>
+      <p data-i18n="hw.lead">No 90-day strategy decks. We get under the hood in week one and start moving spend by week three.</p>
+    </div>
+    <div class="process">
+      <div class="step">
+        <div class="step-num">01</div>
+        <div class="step-title" data-i18n="hw.1.title">Audit</div>
+        <div class="step-body" data-i18n="hw.1.body">Free 60-min teardown of your tracking, creative, and channel mix. You leave with a written gap analysis whether you sign or not.</div>
+      </div>
+      <div class="step">
+        <div class="step-num">02</div>
+        <div class="step-title" data-i18n="hw.2.title">Strategy</div>
+        <div class="step-body" data-i18n="hw.2.body">Two-week sprint. We model CAC and LTV by market, define holdouts, deploy the server-side container, and pre-build the first 30 creative concepts.</div>
+      </div>
+      <div class="step">
+        <div class="step-num">03</div>
+        <div class="step-title" data-i18n="hw.3.title">Execution</div>
+        <div class="step-body" data-i18n="hw.3.body">Spend goes live. Weekly cohort dossier, twice-weekly reallocation calls, and Slack-direct access to the buyer running your account.</div>
+      </div>
+      <div class="step">
+        <div class="step-num">04</div>
+        <div class="step-title" data-i18n="hw.4.title">Scale</div>
+        <div class="step-body" data-i18n="hw.4.body">Once unit economics are proven on holdout, we open new markets, channels, and creative angles aggressively. Compounding is the moat.</div>
       </div>
     </div>
   </div>
 </section>
 
 <!-- QUOTE / DARK BAND -->
-<section class="quote">
+<section class="quote quote-bg" style="padding-top:48px;background:#080604 url('imgs/background-contractsection-wagerads.webp') right center / 60% auto no-repeat">
+  <!-- Basalt column watermark -->
+  <svg class="quote-bg-cols" width="480" height="400" viewBox="0 0 480 400" aria-hidden="true" preserveAspectRatio="xMaxYMax slice">
+    <g fill="var(--fire)" opacity="1">
+      <!-- Column group — hexagonal basalt cross-sections -->
+      <polygon points="60,400 100,400 120,340 80,310 40,340"/>
+      <polygon points="100,400 140,400 160,340 120,310 80,340"/>
+      <polygon points="140,400 180,400 200,340 160,310 120,340"/>
+      <polygon points="180,400 220,400 240,340 200,310 160,340"/>
+      <polygon points="220,400 260,400 280,340 240,310 200,340"/>
+      <polygon points="260,400 300,400 320,340 280,310 240,340"/>
+      <polygon points="300,400 340,400 360,340 320,310 280,340"/>
+      <polygon points="340,400 380,400 400,340 360,310 320,340"/>
+      <polygon points="380,400 420,400 440,340 400,310 360,340"/>
+      <polygon points="420,400 480,400 480,340 440,310 400,340"/>
+      <!-- Second row offset -->
+      <polygon points="40,340 80,340 100,280 60,250 20,280"/>
+      <polygon points="80,340 120,340 140,280 100,250 60,280"/>
+      <polygon points="120,340 160,340 180,280 140,250 100,280"/>
+      <polygon points="160,340 200,340 220,280 180,250 140,280"/>
+      <polygon points="200,340 240,340 260,280 220,250 180,280"/>
+      <polygon points="240,340 280,340 300,280 260,250 220,280"/>
+      <polygon points="280,340 320,340 340,280 300,250 260,280"/>
+      <polygon points="320,340 360,340 380,280 340,250 300,280"/>
+      <polygon points="360,340 400,340 420,280 380,250 340,280"/>
+      <polygon points="400,340 480,340 480,250 420,280 380,250"/>
+    </g>
+  </svg>
   <div class="container">
-    <div class="eyebrow" style="color:rgba(244,241,234,0.55);margin-bottom:32px" data-i18n="quote.eyebrow">↳ The position</div>
-    <div class="quote-text" data-i18n="quote.text" data-i18n-html="true">Stop hiring agencies.<br/>Hire <em>media buyers.</em></div>
+    <div class="eyebrow" style="margin-bottom:32px" data-i18n="quote.eyebrow">↳ The position</div>
+    <div class="quote-text" data-i18n="quote.text" data-i18n-html="true">Chega de agência generalista.<br/><em>iGaming exige quem já viveu a operação.</em></div>
     <div class="quote-attr">
       <div class="quote-attr-line"></div>
-      <span data-i18n="quote.attr">Performance is the contract · WagerAds</span>
+      <span data-i18n="quote.attr">Performance é o contrato · WagerAds</span>
     </div>
+    <a href="#contact" class="btn-primary" style="margin-top:40px;display:inline-flex"><span data-i18n="nav.cta">Agendar reunião</span> <span aria-hidden="true">→</span></a>
   </div>
 </section>
 
@@ -442,7 +655,7 @@
     </div>
     <div class="section-head">
       <div>
-        <div class="eyebrow" style="margin-bottom:16px" data-i18n="ag.eyebrow">02 · AI Agents</div>
+        <div class="eyebrow" style="margin-bottom:16px" data-i18n="ag.eyebrow">06 · AI Agents</div>
         <h2 class="display" data-i18n="ag.title" data-i18n-html="true">A team that<br/>doesn't sleep.</h2>
       </div>
       <p data-i18n="ag.lead">We cloned 10+ years of our founders' digital-marketing instinct into autonomous agents that watch every client account around the clock — mapping competitors, producing creative, optimizing campaigns, analyzing data, and shipping reports that actually move spend.</p>
@@ -492,12 +705,12 @@
 </section>
 
 <!-- TRACKING DIAGRAM -->
-<section class="tracking" id="tracking">
+<section class="tracking" id="tracking" style="padding-bottom:48px">
   <div class="container">
     <div class="section-head">
       <div>
-        <div class="eyebrow" style="margin-bottom:16px" data-i18n="tr.eyebrow">03 · Tracking</div>
-        <h2 class="display" data-i18n="tr.title" data-i18n-html="true">Server-side<br/>by default.</h2>
+        <div class="eyebrow" style="margin-bottom:16px" data-i18n="tr.eyebrow">07 · Tracking</div>
+        <h2 class="display" style="font-size:clamp(24px,3.2vw,42px);max-width:1200px" data-i18n="tr.title" data-i18n-html="true">Cada centavo rastreado. Cada decisão baseada em dado real.</h2>
       </div>
       <p data-i18n="tr.lead">A proprietary container we deploy under your domain. Every event flows server-to-server, deduplicated, signed, and replayed to walled gardens with full payload — the way attribution should have always worked.</p>
     </div>
@@ -538,181 +751,13 @@
   </div>
 </section>
 
-<!-- REACH / MARKETS -->
-<section class="section section--dark" id="reach">
-  <div class="container">
-    <div class="section-head">
-      <div>
-        <div class="eyebrow" style="margin-bottom:16px" data-i18n="rch.eyebrow">04 · Reach</div>
-        <h2 class="display" data-i18n="rch.title" data-i18n-html="true">LATAM DNA.<br/>Global posture.</h2>
-      </div>
-      <p data-i18n="rch.lead">Local language, local payment rails, local compliance — without sacrificing the analytical depth international operators expect. Built for the region the global agency networks under-serve.</p>
-    </div>
-    <div class="reach">
-      <div class="reach-stats">
-        <div class="reach-stat"><div class="num">10+</div><div class="lbl" data-i18n="rch.s1">Markets · live</div></div>
-        <div class="reach-stat"><div class="num">5+</div><div class="lbl" data-i18n="rch.s2">Markets · expanding</div></div>
-        <div class="reach-stat"><div class="num">3</div><div class="lbl" data-i18n="rch.s3">Languages · in-house</div></div>
-        <div class="reach-stat"><div class="num">24/7</div><div class="lbl" data-i18n="rch.s4">Buying coverage</div></div>
-      </div>
-      <div class="markets-summary">
-        <span class="markets-summary-pill"><span class="pulse"></span><span class="ct">8</span> <span data-i18n="rch.live">Live</span></span>
-        <span class="markets-summary-pill expanding"><span class="pulse"></span><span class="ct">2</span> <span data-i18n="rch.ready">Ready to expand</span></span>
-        <span class="markets-summary-pill soon"><span class="pulse"></span><span class="ct">1</span> <span data-i18n="rch.soon">Launching soon</span></span>
-      </div>
-      <div class="markets-grid">
-        <div class="markets-list">
-          <div class="market-row"><span class="code">BR</span><span class="name">Brazil</span><span class="status live" data-i18n="rch.live">● Live</span></div>
-          <div class="market-row"><span class="code">MX</span><span class="name">Mexico</span><span class="status live" data-i18n="rch.live">● Live</span></div>
-          <div class="market-row"><span class="code">CO</span><span class="name">Colombia</span><span class="status live" data-i18n="rch.live">● Live</span></div>
-          <div class="market-row"><span class="code">PE</span><span class="name">Peru</span><span class="status live" data-i18n="rch.live">● Live</span></div>
-          <div class="market-row"><span class="code">CL</span><span class="name">Chile</span><span class="status live" data-i18n="rch.live">● Live</span></div>
-        </div>
-        <div class="markets-list">
-          <div class="market-row"><span class="code">AR</span><span class="name">Argentina</span><span class="status live" data-i18n="rch.live">● Live</span></div>
-          <div class="market-row"><span class="code">CA</span><span class="name" data-i18n="rch.ca">Central America</span><span class="status live" data-i18n="rch.live">● Live</span></div>
-          <div class="market-row is-soon"><span class="code">AF</span><span class="name" data-i18n="rch.africa">Africa</span><span class="status soon" data-i18n="rch.soon">◐ Launching soon</span></div>
-          <div class="market-row is-expanding"><span class="code">NA</span><span class="name" data-i18n="rch.na">North America</span><span class="status ready" data-i18n="rch.ready">→ Ready to expand</span></div>
-          <div class="market-row is-expanding"><span class="code">EU</span><span class="name" data-i18n="rch.eu">Europe</span><span class="status ready" data-i18n="rch.ready">→ Ready to expand</span></div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- CHANNELS -->
-<section class="section">
-  <div class="container">
-    <div class="section-head">
-      <div>
-        <div class="eyebrow" style="margin-bottom:16px" data-i18n="chn.eyebrow">05 · Channels</div>
-        <h2 class="display" data-i18n="chn.title">Every surface that converts.</h2>
-      </div>
-      <p data-i18n="chn.lead">One team, one budget, eight surfaces. Reallocation happens in hours, not quarters — because the buyer, the trafficker, and the analyst sit on the same call.</p>
-    </div>
-    <div class="channels">
-      <div class="channel"><div class="channel-name">Google Ads</div><div class="channel-meta">Search · YouTube · UAC</div></div>
-      <div class="channel"><div class="channel-name">Meta</div><div class="channel-meta">Facebook · Instagram</div></div>
-      <div class="channel"><div class="channel-name">TikTok</div><div class="channel-meta">Feed · Spark · Branded</div></div>
-      <div class="channel"><div class="channel-name">Kwai</div><div class="channel-meta" data-i18n="chn.kwai.meta">LATAM-native short video</div></div>
-      <div class="channel"><div class="channel-name">Native</div><div class="channel-meta">Taboola · Outbrain</div></div>
-      <div class="channel"><div class="channel-name">Programmatic</div><div class="channel-meta">DV360 · TradeDesk</div></div>
-      <div class="channel"><div class="channel-name" data-i18n="chn.email.name">Email + SMS</div><div class="channel-meta" data-i18n="chn.email.meta">First-party blasts</div></div>
-      <div class="channel"><div class="channel-name">WhatsApp</div><div class="channel-meta" data-i18n="chn.wa.meta">LATAM direct response</div></div>
-    </div>
-  </div>
-</section>
-
-<!-- WHY WAGERADS -->
-<section class="section" style="padding-top:0">
-  <div class="container">
-    <div class="section-head">
-      <div>
-        <div class="eyebrow" style="margin-bottom:16px" data-i18n="why.eyebrow">06 · Why WagerAds</div>
-        <h2 class="display" data-i18n="why.title">Built for operators who move real volume.</h2>
-      </div>
-      <p data-i18n="why.lead">Four reasons operators with $100K+/month in paid media work with us instead of legacy agency networks.</p>
-    </div>
-    <div class="why">
-      <div class="why-card">
-        <div class="why-num">01</div>
-        <div class="why-title" data-i18n="why.1.title">End-to-end, in one room.</div>
-        <div class="why-body" data-i18n="why.1.body">Creative studio, server-side tracking, media buying, and direct response — all in-house. No vendor pass-throughs, no finger-pointing on attribution.</div>
-      </div>
-      <div class="why-card">
-        <div class="why-num">02</div>
-        <div class="why-title" data-i18n="why.2.title">Multi-market fluency.</div>
-        <div class="why-body" data-i18n="why.2.body">Native PT-BR, ES-LATAM, and EN creative leads. Local payment rails (Pix, SPEI, PSE, SEPA) modeled into the funnel from day one.</div>
-      </div>
-      <div class="why-card">
-        <div class="why-num">03</div>
-        <div class="why-title" data-i18n="why.3.title">Performance is the contract.</div>
-        <div class="why-body" data-i18n="why.3.body">We work toward CPA, ROAS, and NGR targets — not impressions. Every retainer ties to a holdout-validated outcome we agree on in writing.</div>
-      </div>
-      <div class="why-card">
-        <div class="why-num">04</div>
-        <div class="why-title" data-i18n="why.4.title">Regulated, gray, unregulated — fluent in all three.</div>
-        <div class="why-body" data-i18n="why.4.body">We've launched into freshly-regulated markets, scaled gray operations, and run lean in unregulated zones. We know the difference and we play to it.</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- RESULTS -->
-<section class="section section--dark" id="results">
-  <div class="container">
-    <div class="section-head">
-      <div>
-        <div class="eyebrow" style="margin-bottom:16px" data-i18n="rs.eyebrow">07 · Results</div>
-        <h2 class="display" data-i18n="rs.title">Numbers, not narratives.</h2>
-      </div>
-      <p data-i18n="rs.lead">Three engagements, three different problems. Anonymized at the operator's request. Full audit trail available under NDA.</p>
-    </div>
-    <div class="cases">
-      <div class="case">
-        <div class="case-meta"><span data-i18n="rs.1.meta">BR · Sportsbook</span><span data-i18n="rs.1.window">12 mo · 2024–25</span></div>
-        <div class="case-stat">140K</div>
-        <div class="case-title" data-i18n="rs.1.title">FTDs at 20× ROAS, sustained 12 months.</div>
-        <div class="case-detail" data-i18n="rs.1.detail">Scaled Brazilian sportsbook from $400K to $3M monthly media spend without ROAS decay. Holdout-validated.</div>
-      </div>
-      <div class="case">
-        <div class="case-meta"><span data-i18n="rs.2.meta">CA · Casino</span><span data-i18n="rs.2.window">Q3 2025</span></div>
-        <div class="case-stat">$1M+</div>
-        <div class="case-title" data-i18n="rs.2.title">Monthly deposits at $200 average ticket.</div>
-        <div class="case-detail" data-i18n="rs.2.detail">Central America casino operator. Server-side tracking + WhatsApp direct compounded LTV beyond first deposit.</div>
-      </div>
-      <div class="case">
-        <div class="case-meta"><span data-i18n="rs.3.meta">LATAM · Gray</span><span data-i18n="rs.3.window">90 days</span></div>
-        <div class="case-stat">0 → $2M</div>
-        <div class="case-title" data-i18n="rs.3.title">Cold launch to $2M monthly in 90 days.</div>
-        <div class="case-detail" data-i18n="rs.3.detail">Greenfield gray-market operator. Creative, tracking, and traffic stood up in week one. ROAS positive by day 30.</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- HOW WE WORK -->
-<section class="section">
-  <div class="container">
-    <div class="section-head">
-      <div>
-        <div class="eyebrow" style="margin-bottom:16px" data-i18n="hw.eyebrow">08 · How we work</div>
-        <h2 class="display" data-i18n="hw.title">From audit to scale, in four moves.</h2>
-      </div>
-      <p data-i18n="hw.lead">No 90-day strategy decks. We get under the hood in week one and start moving spend by week three.</p>
-    </div>
-    <div class="process">
-      <div class="step">
-        <div class="step-num">01</div>
-        <div class="step-title" data-i18n="hw.1.title">Audit</div>
-        <div class="step-body" data-i18n="hw.1.body">Free 60-min teardown of your tracking, creative, and channel mix. You leave with a written gap analysis whether you sign or not.</div>
-      </div>
-      <div class="step">
-        <div class="step-num">02</div>
-        <div class="step-title" data-i18n="hw.2.title">Strategy</div>
-        <div class="step-body" data-i18n="hw.2.body">Two-week sprint. We model CAC and LTV by market, define holdouts, deploy the server-side container, and pre-build the first 30 creative concepts.</div>
-      </div>
-      <div class="step">
-        <div class="step-num">03</div>
-        <div class="step-title" data-i18n="hw.3.title">Execution</div>
-        <div class="step-body" data-i18n="hw.3.body">Spend goes live. Weekly cohort dossier, twice-weekly reallocation calls, and Slack-direct access to the buyer running your account.</div>
-      </div>
-      <div class="step">
-        <div class="step-num">04</div>
-        <div class="step-title" data-i18n="hw.4.title">Scale</div>
-        <div class="step-body" data-i18n="hw.4.body">Once unit economics are proven on holdout, we open new markets, channels, and creative angles aggressively. Compounding is the moat.</div>
-      </div>
-    </div>
-  </div>
-</section>
-
 <!-- CONTACT -->
-<section class="contact" id="contact">
+<section class="contact" id="contact" style="padding-top:48px">
   <div class="container">
     <div class="section-head">
       <div>
-        <div class="eyebrow" style="margin-bottom:16px" data-i18n="ct.eyebrow">09 · Contact</div>
-        <h2 class="display" data-i18n="ct.title" data-i18n-html="true">Run the math<br/>with us.</h2>
+        <div class="eyebrow" style="margin-bottom:16px" data-i18n="ct.eyebrow">08 · Contact</div>
+        <h2 class="display" style="font-size:clamp(28px,3.5vw,48px);max-width:700px" data-i18n="ct.title" data-i18n-html="true">Nós não convencemos. Mostramos.<br/>O resto é decisão sua.</h2>
       </div>
       <p data-i18n="ct.lead">We work with operators spending $100K+/month on paid media. If that's you, fill out the form — we reply within one business day, São Paulo time.</p>
     </div>
@@ -753,10 +798,7 @@
     <div class="footer-grid">
       <div class="footer-brand">
         <a href="#top" class="brand" style="color:var(--paper)">
-          <svg width="32" height="32" viewBox="0 0 64 64" fill="none">
-            <rect x="0" y="0" width="64" height="64" rx="14" fill="#F4F1EA"/>
-            <path d="M 14 18 L 22 46 L 32 26 L 42 46 L 50 18" stroke="#0B0B0C" stroke-width="3.2" stroke-linecap="square" stroke-linejoin="miter" fill="none"/>
-          </svg>
+          <img src="icons/icone-laranja-wagerads.svg" width="40" height="40" alt="" style="border-radius:9px" />
           <span class="brand-text">wagerads</span>
         </a>
         <div class="footer-tagline" data-i18n="ft.tagline">Bet on math.</div>
@@ -809,22 +851,31 @@
 const I18N = {
   en: {
     "nav.stack":"Stack","nav.agents":"Agents","nav.tracking":"Tracking","nav.reach":"Reach","nav.results":"Results","nav.contact":"Contact","nav.cta":"Book a meeting",
-    "hero.eyebrow":"Performance Media · LATAM-first · Global-ready","hero.title":"Bet on math",
+    "hero.eyebrow":"Performance Media",
+    "hero.title":"Bet on math",
     "hero.sub":"We buy media for operators who move real volume.",
     "hero.lead":"End-to-end acquisition for the iGaming industry. Creative, tracking, and paid media — under one roof, calibrated for regulated, gray-market, and unregulated environments.",
     "hero.cta1":"Book a meeting","hero.cta2":"Get a free 60-min audit",
+    "hero.p1.title":"Blazing Performance","hero.p1.sub":"ROAS-driven, holdout-validated",
+    "hero.p2.title":"Highly Reliable","hero.p2.sub":"Server-side tracking by default",
+    "hero.p3.title":"Operator-First","hero.p3.sub":"Built for $100K+/mo spend",
     "hero.snapshot":"↳ The numbers","hero.snapshot.desc":"Aggregate across operators we currently serve. Reported in cohort, validated by holdout — never last-click.",
     "hero.s1":"Managed in paid media","hero.s2":"FTDs delivered · 12 mo","hero.s3":"Active LATAM markets","hero.s4":"Avg. ROAS · top cohort",
+    "prob.lead":"Most agencies have never operated a real iGaming platform.",
+    "prob.1":"Broken tracking disguised as 'in optimization'",
+    "prob.2":"Creatives with no market context",
+    "prob.3":"No legal or regulated market knowledge",
+    "prob.cta":"You don't need an agency. You need a <em>media buyer</em> who's already run $1M+/month and knows what's at stake.",
     "ticker.left":"↳ Operators on the stack","ticker.confidential":"Names confidential under NDA",
-    "stack.eyebrow":"01 · Our stack","stack.title":"Four pillars.<br/>One operator.",
+    "stack.eyebrow":"01 · Our stack","stack.title":"We didn't become iGaming experts by serving clients.","stack.sub":"Our expertise comes from those who've been on the other side and built a relevant operation before managing yours.",
     "stack.lead":"Most agencies operate one slice and outsource the rest. We run creative, tracking, paid media, and direct-response channels in-house — the same team owns the dossier from concept to deposit.",
     "stack.1.num":"01 / Creative","stack.1.title":"Concepts that pass compliance and convert.","stack.1.body":"Static, video, and UGC built specifically for sportsbook and casino. 30+ concepts/month, graded by FTD performance — not CTR theater.",
     "stack.2.num":"02 / Tracking","stack.2.title":"Server-side, audited, yours to own.","stack.2.body":"Proprietary server-side container with Meta CAPI, TikTok Events API, and clean attribution storage. iOS 14+ proof. Walled gardens stop being a black box.",
     "stack.3.num":"03 / Traffic","stack.3.title":"Paid media across every surface that moves volume.","stack.3.body":"Google, Meta, TikTok, Kwai, native, programmatic — operated as one budget, reallocated weekly on incremental lift.",
     "stack.4.num":"04 / Direct","stack.4.title":"Email, SMS, and WhatsApp blasts at LATAM scale.","stack.4.body":"First-party lists and direct-response engines that re-activate dormant cohorts and compound LTV after the install.",
-    "quote.eyebrow":"↳ The position","quote.text":"Stop hiring agencies.<br/>Hire <em>media buyers.</em>","quote.attr":"Performance is the contract · WagerAds",
+    "quote.eyebrow":"↳ The position","quote.text":"No more generalist agencies.<br/><em>iGaming demands those who've lived the operation.</em>","quote.attr":"Performance is the contract · WagerAds",
     "ag.status":"Agents · Always-on · 24/7",
-    "ag.eyebrow":"02 · AI Agents","ag.title":"A team that<br/>doesn't sleep.",
+    "ag.eyebrow":"06 · AI Agents","ag.title":"A team that<br/>doesn't sleep.",
     "ag.lead":"We cloned 10+ years of our founders' digital-marketing instinct into autonomous agents that watch every client account around the clock — mapping competitors, producing creative, optimizing campaigns, analyzing data, and shipping reports that actually move spend.",
     "ag.pitch":"Founder-grade judgment, <em>compounded by machines.</em>",
     "ag.body":"Every dossier we've built, every creative call we've made, every realloc decision we've signed off on — distilled into a system that runs in the background of your account. Humans on our team see the same dashboard. They intervene where instinct beats inference. The rest is automated.",
@@ -835,16 +886,16 @@ const I18N = {
     "ag.3.name":"Optimizing campaigns","ag.3.meta":"Hourly bid + budget",
     "ag.4.name":"Analyzing data","ag.4.meta":"Cohort-aware",
     "ag.5.name":"Shipping value reports","ag.5.meta":"Weekly · per market",
-    "tr.eyebrow":"03 · Tracking","tr.title":"Server-side<br/>by default.",
+    "tr.eyebrow":"07 · Tracking","tr.title":"Every cent tracked. Every decision based on real data.",
     "tr.lead":"A proprietary container we deploy under your domain. Every event flows server-to-server, deduplicated, signed, and replayed to walled gardens with full payload — the way attribution should have always worked.",
-    "rch.eyebrow":"04 · Reach","rch.title":"LATAM DNA.<br/>Global posture.",
+    "rch.eyebrow":"03 · Reach","rch.title":"Regulated or not. Near or far, the result is the same.",
     "rch.lead":"Local language, local payment rails, local compliance — without sacrificing the analytical depth international operators expect. Built for the region the global agency networks under-serve.",
     "rch.s1":"Markets · live","rch.s2":"Markets · expanding","rch.s3":"Languages · in-house","rch.s4":"Buying coverage",
     "rch.live":"● Live","rch.exp":"→ Expanding","rch.ca":"Central America","rch.soon":"◐ Launching soon","rch.ready":"→ Ready to expand","rch.africa":"Africa","rch.na":"North America","rch.eu":"Europe",
-    "chn.eyebrow":"05 · Channels","chn.title":"Every surface that converts.",
+    "chn.eyebrow":"02 · Channels","chn.title":"Every surface that converts.",
     "chn.lead":"One team, one budget, eight surfaces. Reallocation happens in hours, not quarters — because the buyer, the trafficker, and the analyst sit on the same call.",
     "chn.kwai.meta":"LATAM-native short video","chn.email.name":"Email + SMS","chn.email.meta":"First-party blasts","chn.wa.meta":"LATAM direct response",
-    "why.eyebrow":"06 · Why WagerAds","why.title":"Built for operators who move real volume.",
+    "why.eyebrow":"04 · Why WagerAds","why.title":"We're not the biggest agency in the market. We're the best.",
     "why.lead":"Four reasons operators with $100K+/month in paid media work with us instead of legacy agency networks.",
     "why.1.title":"End-to-end, in one room.","why.1.body":"Creative studio, server-side tracking, media buying, and direct response — all in-house. No vendor pass-throughs, no finger-pointing on attribution.",
     "why.2.title":"Multi-market fluency.","why.2.body":"Native PT-BR, ES-LATAM, and EN creative leads. Local payment rails (Pix, SPEI, PSE, SEPA) modeled into the funnel from day one.",
@@ -855,13 +906,13 @@ const I18N = {
     "rs.1.meta":"BR · Sportsbook","rs.1.window":"12 mo · 2024–25","rs.1.title":"FTDs at 20× ROAS, sustained 12 months.","rs.1.detail":"Scaled Brazilian sportsbook from $400K to $3M monthly media spend without ROAS decay. Holdout-validated.",
     "rs.2.meta":"CA · Casino","rs.2.window":"Q3 2025","rs.2.title":"Monthly deposits at $200 average ticket.","rs.2.detail":"Central America casino operator. Server-side tracking + WhatsApp direct compounded LTV beyond first deposit.",
     "rs.3.meta":"LATAM · Gray","rs.3.window":"90 days","rs.3.title":"Cold launch to $2M monthly in 90 days.","rs.3.detail":"Greenfield gray-market operator. Creative, tracking, and traffic stood up in week one. ROAS positive by day 30.",
-    "hw.eyebrow":"08 · How we work","hw.title":"From audit to scale, in four moves.",
+    "hw.eyebrow":"05 · How we work","hw.title":"From audit to scale, in four moves.",
     "hw.lead":"No 90-day strategy decks. We get under the hood in week one and start moving spend by week three.",
     "hw.1.title":"Audit","hw.1.body":"Free 60-min teardown of your tracking, creative, and channel mix. You leave with a written gap analysis whether you sign or not.",
     "hw.2.title":"Strategy","hw.2.body":"Two-week sprint. We model CAC and LTV by market, define holdouts, deploy the server-side container, and pre-build the first 30 creative concepts.",
     "hw.3.title":"Execution","hw.3.body":"Spend goes live. Weekly cohort dossier, twice-weekly reallocation calls, and Slack-direct access to the buyer running your account.",
     "hw.4.title":"Scale","hw.4.body":"Once unit economics are proven on holdout, we open new markets, channels, and creative angles aggressively. Compounding is the moat.",
-    "ct.eyebrow":"09 · Contact","ct.title":"Run the math<br/>with us.",
+    "ct.eyebrow":"08 · Contact","ct.title":"We don't convince. We show.<br/>The rest is your call.",
     "ct.lead":"We work with operators spending $100K+/month on paid media. If that's you, fill out the form — we reply within one business day, São Paulo time.",
     "ct.f.name":"Your name","ct.f.email":"Work email","ct.f.co":"Operator / company","ct.f.spend":"Monthly paid media spend","ct.f.spend.0":"Select range…","ct.f.markets":"Markets you operate in","ct.f.ca":"Central America","ct.f.other":"Other","ct.f.msg":"What are you trying to solve?","ct.f.submit":"Book a meeting",
     "ft.tagline":"Bet on math.","ft.parent":"A NT Capital Group company",
@@ -872,22 +923,30 @@ const I18N = {
   },
   pt: {
     "nav.stack":"Stack","nav.agents":"Agentes","nav.tracking":"Tracking","nav.reach":"Alcance","nav.results":"Resultados","nav.contact":"Contato","nav.cta":"Agendar reunião",
-    "hero.eyebrow":"Mídia de Performance · LATAM-first · Pronto para o mundo","hero.title":"Bet on math",
+    "hero.eyebrow":"Mídia de Performance","hero.title":"Bet on math",
     "hero.sub":"Compramos mídia para operadores que movem volume de verdade.",
     "hero.lead":"Aquisição end-to-end para a indústria de iGaming. Criativo, tracking e mídia paga — sob o mesmo teto, calibrados para mercados regulados, gray-market e não-regulados.",
     "hero.cta1":"Agendar reunião","hero.cta2":"Auditoria gratuita de 60 min",
+    "hero.p1.title":"Performance Total","hero.p1.sub":"ROAS-driven, validado por holdout",
+    "hero.p2.title":"Alta Confiabilidade","hero.p2.sub":"Tracking server-side por padrão",
+    "hero.p3.title":"Feito para Operadores","hero.p3.sub":"Para investimentos de $100K+/mês",
     "hero.snapshot":"↳ Os números","hero.snapshot.desc":"Agregado dos operadores que atendemos. Reportado em coorte e validado por holdout — nunca por last-click.",
     "hero.s1":"Gerenciados em mídia paga","hero.s2":"FTDs entregues · 12 meses","hero.s3":"Mercados LATAM ativos","hero.s4":"ROAS médio · coorte top",
+    "prob.lead":"A maioria das agências nunca operou uma plataforma de iGaming de verdade.",
+    "prob.1":"Tracking quebrado disfarçado de 'em otimização'",
+    "prob.2":"Criativos sem contexto de mercado",
+    "prob.3":"Nenhum contexto jurídico ou de mercado regulado",
+    "prob.cta":"Você não precisa de uma agência. Precisa de um <em>media buyer</em> que já rodou $1M+/mês e sabe o que está em jogo.",
     "ticker.left":"↳ Operadores no stack","ticker.confidential":"Nomes confidenciais sob NDA",
-    "stack.eyebrow":"01 · Nosso stack","stack.title":"Quatro pilares.<br/>Um operador.",
+    "stack.eyebrow":"01 · Nosso stack","stack.title":"Não viramos especialistas em iGaming atendendo clientes.","stack.sub":"Nossa expertise vem de quem já esteve do outro lado e construiu uma operação relevante antes de gerenciar a sua.",
     "stack.lead":"A maioria das agências opera uma fatia e terceiriza o resto. Rodamos criativo, tracking, mídia paga e canais de resposta direta in-house — o mesmo time é dono do dossiê do conceito ao depósito.",
     "stack.1.num":"01 / Criativo","stack.1.title":"Conceitos que passam no compliance e convertem.","stack.1.body":"Estáticos, vídeo e UGC construídos especificamente para sportsbook e cassino. 30+ conceitos/mês, avaliados por performance de FTD — não teatro de CTR.",
     "stack.2.num":"02 / Tracking","stack.2.title":"Server-side, auditado, seu para manter.","stack.2.body":"Container server-side proprietário com Meta CAPI, TikTok Events API e armazenamento de atribuição limpo. À prova de iOS 14+. Walled gardens deixam de ser caixa-preta.",
     "stack.3.num":"03 / Tráfego","stack.3.title":"Mídia paga em todas as superfícies que movem volume.","stack.3.body":"Google, Meta, TikTok, Kwai, native, programática — operados como um único orçamento, realocados semanalmente por lift incremental.",
     "stack.4.num":"04 / Direto","stack.4.title":"Email, SMS e WhatsApp em escala LATAM.","stack.4.body":"Listas first-party e máquinas de resposta direta que reativam coortes dormentes e compõem LTV depois do install.",
-    "quote.eyebrow":"↳ A nossa posição","quote.text":"Pare de contratar agências.<br/>Contrate <em>media buyers.</em>","quote.attr":"Performance é o contrato · WagerAds",
+    "quote.eyebrow":"↳ A nossa posição","quote.text":"Chega de agência generalista.<br/><em>iGaming exige quem já viveu a operação.</em>","quote.attr":"Performance é o contrato · WagerAds",
     "ag.status":"Agentes · Sempre on · 24/7",
-    "ag.eyebrow":"02 · Agentes de IA","ag.title":"Um time que<br/>não dorme.",
+    "ag.eyebrow":"06 · Agentes de IA","ag.title":"Um time que<br/>não dorme.",
     "ag.lead":"Clonamos para a IA mais de 10 anos do conhecimento dos founders no mercado digital e criamos agentes autônomos que acompanham as campanhas dos nossos clientes 24/7 — mapeando concorrentes, produzindo criativos, otimizando campanhas, analisando dados e entregando relatórios de valor.",
     "ag.pitch":"Julgamento de founder, <em>composto por máquinas.</em>",
     "ag.body":"Cada dossiê que construímos, cada decisão de criativo que tomamos, cada realocação que assinamos — destilados em um sistema que roda no fundo da sua conta. Nosso time humano vê o mesmo painel. Intervimos onde o instinto vence a inferência. O resto é automatizado.",
@@ -898,16 +957,16 @@ const I18N = {
     "ag.3.name":"Otimizando campanhas","ag.3.meta":"Bid + budget horário",
     "ag.4.name":"Analisando dados","ag.4.meta":"Cohort-aware",
     "ag.5.name":"Entregando relatórios de valor","ag.5.meta":"Semanal · por mercado",
-    "tr.eyebrow":"03 · Tracking","tr.title":"Server-side<br/>por padrão.",
+    "tr.eyebrow":"07 · Tracking","tr.title":"Cada centavo rastreado. Cada decisão baseada em dado real.",
     "tr.lead":"Um container proprietário implantado no seu domínio. Cada evento flui server-to-server, deduplicado, assinado e replayado para walled gardens com payload completo — do jeito que atribuição sempre deveria ter funcionado.",
-    "rch.eyebrow":"04 · Alcance","rch.title":"DNA LATAM.<br/>Postura global.",
+    "rch.eyebrow":"03 · Alcance","rch.title":"Regulado ou não. Perto ou longe, o resultado é o mesmo.",
     "rch.lead":"Idioma local, rails de pagamento locais, compliance local — sem abrir mão da profundidade analítica que operadores internacionais esperam. Construídos para a região que as redes globais sub-atendem.",
     "rch.s1":"Mercados · ao vivo","rch.s2":"Mercados · em expansão","rch.s3":"Idiomas · in-house","rch.s4":"Cobertura de buying",
     "rch.live":"● Ao vivo","rch.exp":"→ Em expansão","rch.ca":"América Central","rch.soon":"◐ Em breve iniciamos","rch.ready":"→ Prontos para expandir","rch.africa":"África","rch.na":"América do Norte","rch.eu":"Europa",
-    "chn.eyebrow":"05 · Canais","chn.title":"Toda superfície que converte.",
+    "chn.eyebrow":"02 · Canais","chn.title":"Toda superfície que converte.",
     "chn.lead":"Um time, um orçamento, oito superfícies. Realocação em horas, não em trimestres — porque o buyer, o trafficker e o analista estão na mesma call.",
     "chn.kwai.meta":"Vídeo curto LATAM-native","chn.email.name":"Email + SMS","chn.email.meta":"Disparos first-party","chn.wa.meta":"Resposta direta LATAM",
-    "why.eyebrow":"06 · Por que WagerAds","why.title":"Construídos para operadores que movem volume de verdade.",
+    "why.eyebrow":"04 · Por que WagerAds","why.title":"Não somos a maior agência do mercado. Somos a melhor.",
     "why.lead":"Quatro razões pelas quais operadores com $100K+/mês em mídia paga trabalham conosco em vez de redes de agência tradicionais.",
     "why.1.title":"End-to-end, na mesma sala.","why.1.body":"Estúdio criativo, tracking server-side, media buying e resposta direta — tudo in-house. Sem repasse para fornecedor, sem dedo apontado em atribuição.",
     "why.2.title":"Fluência multi-mercado.","why.2.body":"Líderes criativos nativos em PT-BR, ES-LATAM e EN. Rails locais (Pix, SPEI, PSE, SEPA) modelados no funil desde o dia um.",
@@ -918,13 +977,13 @@ const I18N = {
     "rs.1.meta":"BR · Sportsbook","rs.1.window":"12 meses · 2024–25","rs.1.title":"FTDs a 20× ROAS, sustentados por 12 meses.","rs.1.detail":"Sportsbook brasileiro escalado de $400K para $3M/mês em mídia sem queda de ROAS. Validado por holdout.",
     "rs.2.meta":"CA · Cassino","rs.2.window":"3º trim. 2025","rs.2.title":"$1M+ em depósitos mensais com ticket médio de $200.","rs.2.detail":"Operador de cassino na América Central. Tracking server-side + WhatsApp direto compuseram LTV além do primeiro depósito.",
     "rs.3.meta":"LATAM · Cinza","rs.3.window":"90 dias","rs.3.title":"Lançamento a frio até $2M/mês em 90 dias.","rs.3.detail":"Operador greenfield em mercado cinza. Criativo, tracking e tráfego no ar na primeira semana. ROAS positivo no dia 30.",
-    "hw.eyebrow":"08 · Como trabalhamos","hw.title":"Da auditoria ao scale, em quatro movimentos.",
+    "hw.eyebrow":"05 · Como trabalhamos","hw.title":"Da auditoria ao scale, em quatro movimentos.",
     "hw.lead":"Sem deck de estratégia de 90 dias. Entramos no motor na semana um e começamos a mover spend na semana três.",
     "hw.1.title":"Auditoria","hw.1.body":"Análise gratuita de 60 min do seu tracking, criativo e mix de canais. Você sai com um gap analysis escrito, contratando ou não.",
     "hw.2.title":"Estratégia","hw.2.body":"Sprint de duas semanas. Modelamos CAC e LTV por mercado, definimos holdouts, implantamos o container server-side e pré-construímos os primeiros 30 conceitos.",
     "hw.3.title":"Execução","hw.3.body":"Spend ao ar. Dossiê semanal de coorte, calls bi-semanais de realocação e acesso direto via Slack ao buyer rodando sua conta.",
     "hw.4.title":"Escala","hw.4.body":"Provada a unit economics no holdout, abrimos novos mercados, canais e ângulos criativos agressivamente. Composição é o moat.",
-    "ct.eyebrow":"09 · Contato","ct.title":"Rode a matemática<br/>com a gente.",
+    "ct.eyebrow":"08 · Contato","ct.title":"Nós não convencemos. Mostramos.<br/>O resto é decisão sua.",
     "ct.lead":"Trabalhamos com operadores investindo $100K+/mês em mídia paga. Se for o seu caso, preencha o formulário — respondemos em até 1 dia útil, horário de São Paulo.",
     "ct.f.name":"Seu nome","ct.f.email":"Email corporativo","ct.f.co":"Operador / empresa","ct.f.spend":"Spend mensal em mídia paga","ct.f.spend.0":"Selecione a faixa…","ct.f.markets":"Mercados em que opera","ct.f.ca":"América Central","ct.f.other":"Outro","ct.f.msg":"O que está tentando resolver?","ct.f.submit":"Agendar reunião",
     "ft.tagline":"Bet on math.","ft.parent":"Uma empresa NT Capital Group",
@@ -935,22 +994,30 @@ const I18N = {
   },
   es: {
     "nav.stack":"Stack","nav.agents":"Agentes","nav.tracking":"Tracking","nav.reach":"Alcance","nav.results":"Resultados","nav.contact":"Contacto","nav.cta":"Agendar reunión",
-    "hero.eyebrow":"Performance Media · LATAM-first · Listo para el mundo","hero.title":"Bet on math",
+    "hero.eyebrow":"Performance Media","hero.title":"Bet on math",
     "hero.sub":"Compramos medios para operadores que mueven volumen de verdad.",
     "hero.lead":"Adquisición end-to-end para la industria iGaming. Creativo, tracking y medios pagados — bajo un mismo techo, calibrados para mercados regulados, gray-market y no regulados.",
     "hero.cta1":"Agendar reunión","hero.cta2":"Auditoría gratuita de 60 min",
+    "hero.p1.title":"Performance Total","hero.p1.sub":"ROAS-driven, validado por holdout",
+    "hero.p2.title":"Alta Confiabilidad","hero.p2.sub":"Tracking server-side por defecto",
+    "hero.p3.title":"Para Operadores","hero.p3.sub":"Diseñado para $100K+/mes",
     "hero.snapshot":"↳ Los números","hero.snapshot.desc":"Agregado de los operadores que servimos. Reportado por cohorte, validado por holdout — nunca last-click.",
     "hero.s1":"Gestionados en medios pagados","hero.s2":"FTDs entregados · 12 meses","hero.s3":"Mercados LATAM activos","hero.s4":"ROAS prom. · cohorte top",
+    "prob.lead":"La mayoría de agencias nunca ha operado una plataforma real de iGaming.",
+    "prob.1":"Tracking roto disfrazado de 'en optimización'",
+    "prob.2":"Creativos sin contexto de mercado",
+    "prob.3":"Sin conocimiento jurídico ni de mercados regulados",
+    "prob.cta":"No necesitas una agencia. Necesitas un <em>media buyer</em> que ya corrió $1M+/mes y sabe lo que está en juego.",
     "ticker.left":"↳ Operadores en el stack","ticker.confidential":"Nombres confidenciales bajo NDA",
-    "stack.eyebrow":"01 · Nuestro stack","stack.title":"Cuatro pilares.<br/>Un operador.",
+    "stack.eyebrow":"01 · Nuestro stack","stack.title":"No nos volvimos expertos en iGaming atendiendo clientes.","stack.sub":"Nuestra expertise viene de quienes ya estuvieron del otro lado y construyeron una operación relevante antes de gestionar la tuya.",
     "stack.lead":"La mayoría de agencias opera una rebanada y terceriza el resto. Corremos creativo, tracking, medios pagados y canales de respuesta directa in-house — el mismo equipo es dueño del dossier del concepto al depósito.",
     "stack.1.num":"01 / Creativo","stack.1.title":"Conceptos que pasan compliance y convierten.","stack.1.body":"Estáticos, video y UGC construidos específicamente para sportsbook y casino. 30+ conceptos/mes, evaluados por performance de FTD — no teatro de CTR.",
     "stack.2.num":"02 / Tracking","stack.2.title":"Server-side, auditado, tuyo para mantener.","stack.2.body":"Contenedor server-side propietario con Meta CAPI, TikTok Events API y almacenamiento de atribución limpio. A prueba de iOS 14+. Walled gardens dejan de ser caja negra.",
     "stack.3.num":"03 / Tráfico","stack.3.title":"Medios pagados en cada superficie que mueve volumen.","stack.3.body":"Google, Meta, TikTok, Kwai, native, programática — operados como un solo presupuesto, reasignados semanalmente por lift incremental.",
     "stack.4.num":"04 / Directo","stack.4.title":"Email, SMS y WhatsApp a escala LATAM.","stack.4.body":"Listas first-party y motores de respuesta directa que reactivan cohortes dormidas y componen LTV después del install.",
-    "quote.eyebrow":"↳ Nuestra posición","quote.text":"Deja de contratar agencias.<br/>Contrata <em>media buyers.</em>","quote.attr":"Performance es el contrato · WagerAds",
+    "quote.eyebrow":"↳ Nuestra posición","quote.text":"Basta de agencias generalistas.<br/><em>iGaming exige quienes ya vivieron la operación.</em>","quote.attr":"Performance es el contrato · WagerAds",
     "ag.status":"Agentes · Siempre activos · 24/7",
-    "ag.eyebrow":"02 · Agentes de IA","ag.title":"Un equipo que<br/>no duerme.",
+    "ag.eyebrow":"06 · Agentes de IA","ag.title":"Un equipo que<br/>no duerme.",
     "ag.lead":"Clonamos más de 10 años del conocimiento de los founders en marketing digital y creamos agentes autónomos que acompañan las campañas de nuestros clientes 24/7 — mapeando competidores, produciendo creativos, optimizando campañas, analizando datos y entregando reportes de valor.",
     "ag.pitch":"Juicio de founder, <em>compuesto por máquinas.</em>",
     "ag.body":"Cada dossier que construimos, cada decisión creativa que tomamos, cada reasignación que firmamos — destilados en un sistema que corre en el fondo de tu cuenta. Nuestro equipo humano ve el mismo panel. Intervenimos donde el instinto vence a la inferencia. El resto es automático.",
@@ -961,16 +1028,16 @@ const I18N = {
     "ag.3.name":"Optimizando campañas","ag.3.meta":"Bid + budget por hora",
     "ag.4.name":"Analizando datos","ag.4.meta":"Cohort-aware",
     "ag.5.name":"Entregando reportes de valor","ag.5.meta":"Semanal · por mercado",
-    "tr.eyebrow":"03 · Tracking","tr.title":"Server-side<br/>por defecto.",
+    "tr.eyebrow":"07 · Tracking","tr.title":"Cada centavo rastreado. Cada decisión basada en dato real.",
     "tr.lead":"Un contenedor propietario que desplegamos bajo tu dominio. Cada evento fluye server-to-server, deduplicado, firmado y reproducido a walled gardens con payload completo — como la atribución debió funcionar siempre.",
-    "rch.eyebrow":"04 · Alcance","rch.title":"ADN LATAM.<br/>Postura global.",
+    "rch.eyebrow":"03 · Alcance","rch.title":"Regulado o no. Cerca o lejos, el resultado es el mismo.",
     "rch.lead":"Idioma local, rails de pago locales, compliance local — sin sacrificar la profundidad analítica que los operadores internacionales esperan. Construidos para la región que las redes globales sub-atienden.",
     "rch.s1":"Mercados · en vivo","rch.s2":"Mercados · expandiendo","rch.s3":"Idiomas · in-house","rch.s4":"Cobertura de buying",
     "rch.live":"● En vivo","rch.exp":"→ Expandiendo","rch.ca":"Centroamérica","rch.soon":"◐ Próximamente","rch.ready":"→ Listos para expandir","rch.africa":"África","rch.na":"América del Norte","rch.eu":"Europa",
-    "chn.eyebrow":"05 · Canales","chn.title":"Cada superficie que convierte.",
+    "chn.eyebrow":"02 · Canales","chn.title":"Cada superficie que convierte.",
     "chn.lead":"Un equipo, un presupuesto, ocho superficies. Reasignación en horas, no en trimestres — porque el buyer, el trafficker y el analista están en la misma llamada.",
     "chn.kwai.meta":"Video corto LATAM-native","chn.email.name":"Email + SMS","chn.email.meta":"Blasts first-party","chn.wa.meta":"Respuesta directa LATAM",
-    "why.eyebrow":"06 · Por qué WagerAds","why.title":"Hechos para operadores que mueven volumen real.",
+    "why.eyebrow":"04 · Por qué WagerAds","why.title":"No somos la agencia más grande del mercado. Somos la mejor.",
     "why.lead":"Cuatro razones por las que operadores con $100K+/mes en medios pagados trabajan con nosotros en lugar de redes de agencia tradicionales.",
     "why.1.title":"End-to-end, en la misma sala.","why.1.body":"Estudio creativo, tracking server-side, media buying y respuesta directa — todo in-house. Sin pase a proveedores, sin dedos apuntando en atribución.",
     "why.2.title":"Fluidez multi-mercado.","why.2.body":"Líderes creativos nativos en PT-BR, ES-LATAM y EN. Rails locales (Pix, SPEI, PSE, SEPA) modelados en el funnel desde el día uno.",
@@ -981,13 +1048,13 @@ const I18N = {
     "rs.1.meta":"BR · Sportsbook","rs.1.window":"12 meses · 2024–25","rs.1.title":"FTDs a 20× ROAS, sostenidos 12 meses.","rs.1.detail":"Sportsbook brasileño escalado de $400K a $3M/mes en medios sin caída de ROAS. Validado por holdout.",
     "rs.2.meta":"CA · Casino","rs.2.window":"3er trim. 2025","rs.2.title":"$1M+ en depósitos mensuales con ticket promedio de $200.","rs.2.detail":"Operador de casino centroamericano. Tracking server-side + WhatsApp directo compusieron LTV más allá del primer depósito.",
     "rs.3.meta":"LATAM · Gris","rs.3.window":"90 días","rs.3.title":"Lanzamiento en frío a $2M/mes en 90 días.","rs.3.detail":"Operador greenfield en mercado gris. Creativo, tracking y tráfico en aire en la primera semana. ROAS positivo al día 30.",
-    "hw.eyebrow":"08 · Cómo trabajamos","hw.title":"De la auditoría al scale, en cuatro movimientos.",
+    "hw.eyebrow":"05 · Cómo trabajamos","hw.title":"De la auditoría al scale, en cuatro movimientos.",
     "hw.lead":"Sin deck de estrategia de 90 días. Nos metemos al motor la semana uno y empezamos a mover spend la semana tres.",
     "hw.1.title":"Auditoría","hw.1.body":"Análisis gratuito de 60 min de tu tracking, creativo y mix de canales. Te llevas un gap analysis por escrito, firmes o no.",
     "hw.2.title":"Estrategia","hw.2.body":"Sprint de dos semanas. Modelamos CAC y LTV por mercado, definimos holdouts, desplegamos el contenedor server-side y pre-construimos los primeros 30 conceptos.",
     "hw.3.title":"Ejecución","hw.3.body":"Spend al aire. Dossier semanal de cohorte, llamadas bi-semanales de reasignación y acceso directo por Slack al buyer corriendo tu cuenta.",
     "hw.4.title":"Escala","hw.4.body":"Probada la unit economics en holdout, abrimos nuevos mercados, canales y ángulos creativos agresivamente. Componer es el moat.",
-    "ct.eyebrow":"09 · Contacto","ct.title":"Corre las cuentas<br/>con nosotros.",
+    "ct.eyebrow":"08 · Contacto","ct.title":"No convencemos. Mostramos.<br/>El resto es tu decisión.",
     "ct.lead":"Trabajamos con operadores invirtiendo $100K+/mes en medios pagados. Si es tu caso, llena el formulario — respondemos en 1 día hábil, hora de São Paulo.",
     "ct.f.name":"Tu nombre","ct.f.email":"Email corporativo","ct.f.co":"Operador / empresa","ct.f.spend":"Spend mensual en medios pagados","ct.f.spend.0":"Selecciona el rango…","ct.f.markets":"Mercados donde operas","ct.f.ca":"Centroamérica","ct.f.other":"Otro","ct.f.msg":"¿Qué estás tratando de resolver?","ct.f.submit":"Agendar reunión",
     "ft.tagline":"Bet on math.","ft.parent":"Una empresa NT Capital Group",
@@ -1090,6 +1157,12 @@ function applyLang(lang){
       }
     });
   }
+  // Nav scroll behavior
+  const nav = document.querySelector('.nav');
+  const onScroll = () => nav.classList.toggle('scrolled', window.scrollY > 40);
+  window.addEventListener('scroll', onScroll, {passive: true});
+  onScroll();
+
 })();
 </script>
 
